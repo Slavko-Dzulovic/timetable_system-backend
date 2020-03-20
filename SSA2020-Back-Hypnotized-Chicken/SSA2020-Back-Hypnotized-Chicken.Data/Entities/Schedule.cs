@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 {
 	[Table("schedules")]
-	public class Schedule : TimestampedEntity<int>
+	public class Schedule : TimestampedEntity<long>
 	{
 		[Key]
 		[Column("id", Order = 0)]
-		public override int Id { get; set; }
+		public override long Id { get; set; }
 		
 		[Required]
 		[Column("department", Order = 1)]

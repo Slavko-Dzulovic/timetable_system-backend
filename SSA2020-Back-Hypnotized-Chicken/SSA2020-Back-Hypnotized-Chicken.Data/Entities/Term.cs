@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 {
-	[Table("classrooms")]
+	[Table("terms")]
 	public class Term : TimestampedEntity<short>
 	{
 		[Key]
@@ -52,7 +52,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		
 		[Required]
 		[Column("schedule_id", Order = 10)]
-		public short ScheduleId { get; set; }
+		public long ScheduleId { get; set; }
 
 		[ForeignKey("ScheduleId")]
 		public Schedule Schedule { get; set; }
