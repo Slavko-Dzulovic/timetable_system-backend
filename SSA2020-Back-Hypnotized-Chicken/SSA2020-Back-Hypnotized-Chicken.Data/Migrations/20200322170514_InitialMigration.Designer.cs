@@ -10,7 +10,7 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    [Migration("20200320234629_InitialMigration")]
+    [Migration("20200322170514_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,11 +209,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnName("subject_id")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("Time")
-                        .IsRequired()
+                    b.Property<DateTime>("Time")
                         .HasColumnName("time")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnName("updated_at")

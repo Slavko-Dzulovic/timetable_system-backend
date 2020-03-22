@@ -207,11 +207,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnName("subject_id")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("Time")
-                        .IsRequired()
+                    b.Property<DateTime>("Time")
                         .HasColumnName("time")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnName("updated_at")

@@ -90,7 +90,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     created_at = table.Column<DateTime>(nullable: false),
                     updated_at = table.Column<DateTime>(nullable: false),
                     weekday = table.Column<string>(maxLength: 255, nullable: false),
-                    time = table.Column<string>(maxLength: 255, nullable: false),
+                    time = table.Column<DateTime>(nullable: false),
                     number_of_lectures = table.Column<short>(nullable: false),
                     number_of_exercises = table.Column<short>(nullable: false),
                     number_of_lab_exercises = table.Column<short>(nullable: false),

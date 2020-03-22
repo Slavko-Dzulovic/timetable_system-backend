@@ -18,8 +18,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 
 		[Required]
 		[Column("time", Order = 2)]
-		[MaxLength(255)]
-		public string Time { get; set; }
+		public DateTime Time { get; set; }
 
 		[Column("number_of_lectures", Order = 3)]
 		public short NumberOfLectures { get; set; }
