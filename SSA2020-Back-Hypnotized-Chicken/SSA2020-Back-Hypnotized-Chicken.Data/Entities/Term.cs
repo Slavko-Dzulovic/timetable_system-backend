@@ -38,19 +38,22 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[Required]
 		[Column("subject_id", Order = 8)]
 		public short SubjectId { get; set; }
+		
+		[Column("optional_subject_number", Order = 9)]
+		public short OptionalSubjectNumber { get; set; }
 
 		[ForeignKey("SubjectId")]
 		public Subject Subject { get; set; }
 		
 		[Required]
-		[Column("classroom_id", Order = 9)]
+		[Column("classroom_id", Order = 10)]
 		public short ClassroomId { get; set; }
 
 		[ForeignKey("ClassroomId")]
 		public Classroom Classroom { get; set; }
 		
 		[Required]
-		[Column("schedule_id", Order = 10)]
+		[Column("schedule_id", Order = 11)]
 		public long ScheduleId { get; set; }
 
 		[ForeignKey("ScheduleId")]
