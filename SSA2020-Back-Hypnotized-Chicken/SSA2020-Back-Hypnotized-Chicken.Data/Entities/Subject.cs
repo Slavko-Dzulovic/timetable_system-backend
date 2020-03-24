@@ -16,9 +16,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Name { get; set; }
 
-		[Column("optional_id", Order = 2)]
-		public short OptionalId { get; set; }
-
 		public ICollection<Lecturer> Lecturers { get; set; }
 		
 		public ICollection<Term> Terms { get; set; }
