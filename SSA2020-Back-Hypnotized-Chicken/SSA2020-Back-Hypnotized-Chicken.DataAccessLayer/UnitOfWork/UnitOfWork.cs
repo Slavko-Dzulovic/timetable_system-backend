@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using SSA2020_Back_Hypnotized_Chicken.Data;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Subjects;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Classrooms;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 {
@@ -14,12 +15,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 		}
 
 		private ISubjectsRepository _subjectsRepository;
+        private IClassroomsRepository _classroomsRepository;
 
-		public ISubjectsRepository SubjectsRepository =>
+        public ISubjectsRepository SubjectsRepository =>
 			this._subjectsRepository ?? (this._subjectsRepository = new SubjectsRepository(_dbContext));
+        public IClassroomsRepository ClassroomsRepository =>
+            this._classroomsRepository ?? (this._classroomsRepository = new ClassroomsRepository(_dbContext));
 
-
-		public Task SaveChangesAsync()
+        public Task SaveChangesAsync()
 		{
 			return _dbContext.SaveChangesAsync();
 		}
