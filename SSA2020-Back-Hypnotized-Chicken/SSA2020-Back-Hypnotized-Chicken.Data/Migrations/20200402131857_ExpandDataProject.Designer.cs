@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200402131857_ExpandDataProject")]
+    partial class ExpandDataProject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,10 +392,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.Property<short>("ScheduleId")
                         .HasColumnName("schedule_id")
                         .HasColumnType("smallint");
-
-                    b.Property<int>("Time")
-                        .HasColumnName("time")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnName("updated_at")
