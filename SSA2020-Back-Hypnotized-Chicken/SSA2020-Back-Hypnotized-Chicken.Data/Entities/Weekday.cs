@@ -4,8 +4,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 {
-	[Table("subjects")]
-	public class Subject : TimestampedEntity<short>
+	public enum Weekdays : short
+	{
+		Monday = 1,
+		Tuesday = 2,
+		Wednesday = 3,
+		Thursday = 4,
+		Friday = 5,
+		Saturday = 6,
+		Sunday = 7
+	}
+	
+	[Table("weekdays")]
+	public class Weekday : TimestampedEntity<short>
 	{
 		[Key]
 		[Column("id", Order = 0)]
@@ -15,9 +26,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[Column("name", Order = 1)]
 		[MaxLength(255)]
 		public string Name { get; set; }
-
-		public ICollection<ModuleSubject> ModuleSubjects { get; set; }
-		public ICollection<SemesterSubject> SemesterSubjects { get; set; }
-		public ICollection<SubjectLecturer> SubjectLecturer { get; set; }
+		
+		public ICollection<Term> Terms { get; set; }
 	}
 }
