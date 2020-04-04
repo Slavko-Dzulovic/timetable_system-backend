@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
@@ -24,11 +25,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Vocation { get; set; }
 
-		[Required]
-		[Column("subject_id", Order = 6)]
-		public short SubjectId { get; set; }
-
-		[ForeignKey("SubjectId")]
-		public Subject Subject { get; set; }
+		public ICollection<SubjectLecturer> SubjectLecturers { get; set; }
 	}
 }

@@ -4,8 +4,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 {
-	[Table("subjects")]
-	public class Subject : TimestampedEntity<short>
+	public enum Semesters : short
+	{
+		I = 1,
+		II = 2,
+		III = 3,
+		IV = 4,
+		V = 5,
+		VI = 6,
+		VII = 7,
+		VIII = 8
+	}
+	
+	[Table("semesters")]
+	public class Semester : TimestampedEntity<short>
 	{
 		[Key]
 		[Column("id", Order = 0)]
@@ -16,8 +28,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Name { get; set; }
 
-		public ICollection<ModuleSubject> ModuleSubjects { get; set; }
+		public Schedule Schedule { get; set; }
 		public ICollection<SemesterSubject> SemesterSubjects { get; set; }
-		public ICollection<SubjectLecturer> SubjectLecturer { get; set; }
 	}
 }
