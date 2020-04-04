@@ -2,12 +2,15 @@
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Subjects;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Classrooms;
 
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers;
+
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 {
 	public interface IUnitOfWork
 	{
 		ISubjectsRepository SubjectsRepository { get; }
         IClassroomsRepository ClassroomsRepository { get; }
+        ILecturersRepository LecturersRepository { get; }
 
         /// <summary>
         /// Save context changes async
