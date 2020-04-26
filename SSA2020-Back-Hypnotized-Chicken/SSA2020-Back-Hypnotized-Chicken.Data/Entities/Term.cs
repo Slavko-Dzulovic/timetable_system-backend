@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
@@ -53,5 +51,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		
 		[ForeignKey("ScheduleId")]
 		public Schedule Schedule { get; set; }
+		
+		[Column("slot_id", Order = 10)]
+		public long SlotId { get; set; }
+		
+		[ForeignKey("SlotId")]
+		public Slot Slot { get; set; }
 	}
 }

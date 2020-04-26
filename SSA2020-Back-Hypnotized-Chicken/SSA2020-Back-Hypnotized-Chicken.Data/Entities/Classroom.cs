@@ -16,7 +16,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Label { get; set; }
 		
-		[Required]
 		[Column("location", Order = 2)]
 		[MaxLength(255)]
 		public string Location { get; set; }

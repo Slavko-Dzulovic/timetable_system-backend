@@ -7,7 +7,7 @@ using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers
 {
-    public class LecturerRepository : Repository<Lecturer, short>, ILecturerRepository
+    public class LecturersRepository : Repository<Lecturer, short>, ILecturersRepository
     {
         private readonly TimetableDbContext _dbContext;
 

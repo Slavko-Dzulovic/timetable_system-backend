@@ -25,6 +25,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Vocation { get; set; }
 
-		public ICollection<SubjectLecturer> SubjectLecturers { get; set; }
+		public ICollection<Slot> Slots { get; set; }
 	}
 }

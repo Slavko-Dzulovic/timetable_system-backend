@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200426203713_AddSlotForeignKeyToTerm")]
+    partial class AddSlotForeignKeyToTerm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,6 +151,43 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.ToTable("modules");
                 });
 
+            modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.ModuleSubject", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("smallint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsOptional")
+                        .HasColumnName("is_optional")
+                        .HasColumnType("boolean");
+
+                    b.Property<short>("ModuleId")
+                        .HasColumnName("module_id")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("SubjectId")
+                        .HasColumnName("subject_id")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnName("updated_at")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModuleId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("module_subjects");
+                });
+
             modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Schedule", b =>
                 {
                     b.Property<short>("Id")
@@ -214,6 +253,39 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("semesters");
+                });
+
+            modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.SemesterSubject", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("smallint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<short>("SemesterId")
+                        .HasColumnName("semester_id")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("SubjectId")
+                        .HasColumnName("subject_id")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnName("updated_at")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SemesterId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("semester_subjects");
                 });
 
             modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Slot", b =>
@@ -290,6 +362,39 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("subjects");
+                });
+
+            modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.SubjectLecturer", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("smallint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnName("created_at")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<short>("LecturerId")
+                        .HasColumnName("lecturer_id")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("SubjectId")
+                        .HasColumnName("subject_id")
+                        .HasColumnType("smallint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnName("updated_at")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LecturerId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("subject_lecturers");
                 });
 
             modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Term", b =>
@@ -401,6 +506,21 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.ModuleSubject", b =>
+                {
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Module", "Module")
+                        .WithMany()
+                        .HasForeignKey("ModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Schedule", b =>
                 {
                     b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Department", "Department")
@@ -412,6 +532,21 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Semester", "Semester")
                         .WithOne("Schedule")
                         .HasForeignKey("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Schedule", "SemesterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.SemesterSubject", b =>
+                {
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Semester", "Semester")
+                        .WithMany()
+                        .HasForeignKey("SemesterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -438,6 +573,21 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 
                     b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Subject", "Subject")
                         .WithMany("Slots")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.SubjectLecturer", b =>
+                {
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Lecturer", "Lecturer")
+                        .WithMany()
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Subject", "Subject")
+                        .WithMany()
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
