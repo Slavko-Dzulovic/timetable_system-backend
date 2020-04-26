@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200426210151_RemoveDepartmentRequiredFromModule")]
+    partial class RemoveDepartmentRequiredFromModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,8 +130,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnName("created_at")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<short>("DepartmentId")
-                        .HasColumnName("department_id")
+                    b.Property<short?>("DepartmentId")
                         .HasColumnType("smallint");
 
                     b.Property<string>("Name")
@@ -394,11 +395,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 
             modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Module", b =>
                 {
-                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Department", "Department")
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Department", null)
                         .WithMany("Modules")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Schedule", b =>

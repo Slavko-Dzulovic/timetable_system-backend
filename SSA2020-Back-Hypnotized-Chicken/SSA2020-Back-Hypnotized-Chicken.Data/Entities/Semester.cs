@@ -29,6 +29,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		public string Name { get; set; }
 
 		public Schedule Schedule { get; set; }
-		public ICollection<SemesterSubject> SemesterSubjects { get; set; }
+		public ICollection<Slot> Slots { get; set; }
 	}
 }

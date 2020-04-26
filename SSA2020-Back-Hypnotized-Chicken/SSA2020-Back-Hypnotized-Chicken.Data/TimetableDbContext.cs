@@ -16,11 +16,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data
         public DbSet<Term> Terms { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Module> Modules { get; set; }
-        public DbSet<ModuleSubject> ModuleSubjects { get; set; }
         public DbSet<Semester> Semesters { get; set; }
-        public DbSet<SemesterSubject> SemesterSubjects { get; set; }
-        public DbSet<SubjectLecturer> SubjectLecturers { get; set; }
         public DbSet<Weekday> Weekdays { get; set; }
+        public DbSet<Slot> Slots { get; set; }
         
         public TimetableDbContext(DbContextOptions<TimetableDbContext> options)
             : base(options)
