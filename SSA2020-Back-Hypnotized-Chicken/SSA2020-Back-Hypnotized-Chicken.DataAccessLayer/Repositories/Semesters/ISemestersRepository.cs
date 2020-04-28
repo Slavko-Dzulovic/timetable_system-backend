@@ -7,6 +7,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
     public interface ISemestersRepository : IRepository<Data.Entities.Semester, short>
     {
         List<Semester> GetSemesters();
+        Semester GetSemesterById(int id);
         Task<List<Semester>> GetSemestersAsync();
     }
 }

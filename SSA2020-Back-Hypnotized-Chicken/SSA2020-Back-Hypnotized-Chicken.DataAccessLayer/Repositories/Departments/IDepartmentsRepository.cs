@@ -7,6 +7,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Departmen
     public interface IDepartmentsRepository : IRepository<Data.Entities.Department, short>
     {
         List<Department> GetDepartments();
+        Department GetDepartmentById(int id);
         Task<List<Department>> GetDepartmentsAsync();
     }
 }

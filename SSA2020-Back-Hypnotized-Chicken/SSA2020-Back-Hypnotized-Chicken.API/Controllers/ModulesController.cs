@@ -30,5 +30,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
             return Ok(moduleMapResult);
         }
+
+        [HttpGet("{id}")]
+        public ModuleDTO GetById(int id)
+        {
+            var module = UnitOfWork.ModulesRepository.GetModuleById(id);
+
+            var moduleMapResult = Mapper.Map<Module, ModuleDTO>(module);
+            return moduleMapResult;
+        }
     }
 }

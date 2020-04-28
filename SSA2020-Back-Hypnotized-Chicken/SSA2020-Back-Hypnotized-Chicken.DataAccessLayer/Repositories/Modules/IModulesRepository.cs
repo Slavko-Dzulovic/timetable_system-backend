@@ -7,6 +7,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules
     public interface IModulesRepository : IRepository<Data.Entities.Module, short>
     {
         List<Module> GetModules();
+        Module GetModuleById(int id);
         Task<List<Module>> GetModulesAsync();
     }
 }
