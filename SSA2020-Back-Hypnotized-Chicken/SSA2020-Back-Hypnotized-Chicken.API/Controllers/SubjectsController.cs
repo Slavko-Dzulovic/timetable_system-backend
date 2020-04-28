@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SSA2020_Back_Hypnotized_Chicken.API.DTOs;
 using SSA2020_Back_Hypnotized_Chicken.API.DTOs.Subjects;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork;
