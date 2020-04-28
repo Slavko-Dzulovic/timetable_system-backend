@@ -52,36 +52,30 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Subject()
             {
                 Id = 8,
-                Name = "Racunarske mreze i komunikacije"
-            }).InsertSql);
-            
-            migrationBuilder.Sql((new Subject()
-            {
-                Id = 9,
                 Name = "Verovatnoca i statistika"
             }).InsertSql);
             
             migrationBuilder.Sql((new Subject()
             {
-                Id = 10,
+                Id = 9,
                 Name = "Softversko inzenjerstvo"
             }).InsertSql);
             
             migrationBuilder.Sql((new Subject()
             {
-                Id = 11,
+                Id = 10,
                 Name = "Uvod u programiranje"
             }).InsertSql);
             
             migrationBuilder.Sql((new Subject()
             {
-                Id = 12,
-                Name = "Softversko inzenjerstvo"
+                Id = 11,
+                Name = "Racunarske simulacije"
             }).InsertSql);
             
             migrationBuilder.Sql((new Subject()
             {
-                Id = 13,
+                Id = 12,
                 Name = "Matematika 2"
             }).InsertSql);
         }
@@ -111,8 +105,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Subject() {Id = 11}).DeleteSql);
 
             migrationBuilder.Sql((new Subject() {Id = 12}).DeleteSql);
-
-            migrationBuilder.Sql((new Subject() {Id = 13}).DeleteSql);
         }
     }
 }
