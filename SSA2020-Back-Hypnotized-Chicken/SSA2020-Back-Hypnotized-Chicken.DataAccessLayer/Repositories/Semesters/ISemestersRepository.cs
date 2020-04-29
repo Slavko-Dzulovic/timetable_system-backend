@@ -4,8 +4,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
 {
-    public interface ISemestersRepository : IRepository<Data.Entities.Semester, short>
-    {
+	public interface ISemestersRepository : IRepository<Semester, short>
+	{
+		Task<bool> CheckIfSemesterExistsAsync(short id);
+		bool CheckIfSemesterExists(short id);
         List<Semester> GetSemesters();
         Task<List<Semester>> GetSemestersAsync();
     }
