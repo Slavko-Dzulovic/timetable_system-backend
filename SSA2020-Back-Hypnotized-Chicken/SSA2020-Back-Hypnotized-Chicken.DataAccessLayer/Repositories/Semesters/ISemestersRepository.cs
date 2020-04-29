@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
@@ -7,5 +8,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
 	{
 		Task<bool> CheckIfSemesterExistsAsync(short id);
 		bool CheckIfSemesterExists(short id);
-	}
+        List<Semester> GetSemesters();
+        Task<List<Semester>> GetSemestersAsync();
+    }
 }

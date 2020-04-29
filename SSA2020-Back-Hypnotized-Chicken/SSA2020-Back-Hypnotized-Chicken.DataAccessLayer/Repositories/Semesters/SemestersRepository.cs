@@ -1,4 +1,5 @@
-﻿using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -23,5 +24,15 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
 		{
 			return _dbContext.Semesters.Any(s => s.Id == id);
 		}
-	}
+
+        public List<Semester> GetSemesters()
+        {
+            return _dbContext.Semesters.ToList();
+        }
+
+        public async Task<List<Semester>> GetSemestersAsync()
+        {
+            return await _dbContext.Semesters.ToListAsync();
+        }
+    }
 }
