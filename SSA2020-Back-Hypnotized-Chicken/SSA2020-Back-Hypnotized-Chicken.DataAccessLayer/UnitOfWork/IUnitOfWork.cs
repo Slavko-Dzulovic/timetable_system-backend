@@ -19,12 +19,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
         ISemestersRepository SemestersRepository { get; }
 		IModulesRepository ModulesRepository { get; }
 
-        /// <summary>
-        /// Save context changes async
-        /// </summary>
-        /// <returns>Return task operation.</returns>
-        Task SaveChangesAsync();
-        
 		/// <summary>
 		/// Save context changes async
 		/// </summary>
