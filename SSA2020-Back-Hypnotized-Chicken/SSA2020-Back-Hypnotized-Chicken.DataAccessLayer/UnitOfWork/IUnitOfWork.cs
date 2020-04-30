@@ -6,6 +6,7 @@ using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 {
@@ -18,6 +19,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
         IDepartmentsRepository DepartmentsRepository { get; }
         ISemestersRepository SemestersRepository { get; }
 		IModulesRepository ModulesRepository { get; }
+		ISlotsRepository SlotsRepository { get;  }
 
 		/// <summary>
 		/// Save context changes async
