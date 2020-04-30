@@ -22,7 +22,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Departmen
         }
         public Department GetDepartmentById(int id)
         {
-            return _dbContext.Departments.Find(id);
+            return _dbContext.Departments.FirstOrDefault(d => d.Id == id);
         }
         public async Task<List<Department>> GetDepartmentsAsync()
         {
