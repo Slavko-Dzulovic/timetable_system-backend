@@ -100,15 +100,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Slot()
             {
                 Id = 11,
-                SubjectId = 7,
-                LecturerId = 5,
-                SemesterId = 1,
-                ModuleId = 1
-            }).InsertSql);
-            
-            migrationBuilder.Sql((new Slot()
-            {
-                Id = 12,
                 SubjectId = 8,
                 LecturerId = 9,
                 SemesterId = 3,
@@ -117,7 +108,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             
             migrationBuilder.Sql((new Slot()
             {
-                Id = 13,
+                Id = 12,
                 SubjectId = 9,
                 LecturerId = 10,
                 SemesterId = 7,
@@ -126,7 +117,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             
             migrationBuilder.Sql((new Slot()
             {
-                Id = 14,
+                Id = 13,
                 SubjectId = 9,
                 LecturerId = 8,
                 SemesterId = 7,
@@ -135,7 +126,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             
             migrationBuilder.Sql((new Slot()
             {
-                Id = 15,
+                Id = 14,
                 SubjectId = 10,
                 LecturerId = 7,
                 SemesterId = 1,
@@ -144,7 +135,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             
             migrationBuilder.Sql((new Slot()
             {
-                Id = 16,
+                Id = 15,
                 SubjectId = 11,
                 LecturerId = 7,
                 SemesterId = 7,
@@ -153,7 +144,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             
             migrationBuilder.Sql((new Slot()
             {
-                Id = 17,
+                Id = 16,
                 SubjectId = 12,
                 LecturerId = 1,
                 SemesterId = 2,
@@ -194,8 +185,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Slot() {Id = 15}).DeleteSql);
             
             migrationBuilder.Sql((new Slot() {Id = 16}).DeleteSql);
-            
-            migrationBuilder.Sql((new Slot() {Id = 17}).DeleteSql);
         }
     }
 }

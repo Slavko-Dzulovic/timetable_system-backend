@@ -16,6 +16,16 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules
             _dbContext = dbContext;
         }
 
+        public async Task<bool> CheckIfModuleExistsAsync(short moduleId)
+        {
+            return await _dbContext.Modules.AnyAsync(m => m.Id == moduleId);
+        }
+
+        public bool CheckIfModuleExists(short moduleId)
+        {
+            return _dbContext.Modules.Any(m => m.Id == moduleId);
+        }
+
         public List<Module> GetModules()
         {
             return _dbContext.Modules.ToList();
