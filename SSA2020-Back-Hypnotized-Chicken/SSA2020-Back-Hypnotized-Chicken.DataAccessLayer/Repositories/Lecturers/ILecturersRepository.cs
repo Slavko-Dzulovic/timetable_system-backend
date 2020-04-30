@@ -6,7 +6,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers
 {
     public interface ILecturersRepository : IRepository<Data.Entities.Lecturer, short>
     {
-        List<Lecturer> GetLecturers();
+        Task<List<Lecturer>> GetLecturersBySemesterModuleSubjectAsync(short subjectId, short moduleId, short semesterId);
+        List<Lecturer> GetLecturersBySemesterModuleSubject(short subjectId, short moduleId, short semesterId);
         Task<List<Lecturer>> GetLecturersAsync();
+        List<Lecturer> GetLecturers();
+        
     }
 }
