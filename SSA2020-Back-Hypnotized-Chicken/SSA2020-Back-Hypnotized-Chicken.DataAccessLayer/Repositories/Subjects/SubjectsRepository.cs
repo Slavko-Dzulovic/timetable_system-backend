@@ -15,7 +15,17 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Subjects
 		{
 			_dbContext = dbContext;
 		}
-		
+
+		public async Task<bool> CheckIfSubjectExistsAsync(short subjectId)
+		{
+			return await _dbContext.Subjects.AnyAsync(s => s.Id == subjectId);
+		}
+
+		public bool CheckIfSubjectExists(short subjectId)
+		{
+			return _dbContext.Subjects.Any(s => s.Id == subjectId);
+		}
+
 		public List<Subject> GetSubjects()
 		{
 			return _dbContext.Subjects.ToList();

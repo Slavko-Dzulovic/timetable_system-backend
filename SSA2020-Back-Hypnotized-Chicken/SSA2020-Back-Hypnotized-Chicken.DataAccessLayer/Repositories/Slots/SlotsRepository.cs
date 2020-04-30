@@ -31,7 +31,16 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 
 		public List<Subject> SubjectsBySemesterAndModule(short semesterId, short moduleId)
 		{
-			throw new System.NotImplementedException();
+			var queryResult = _dbContext.Slots
+				.Include(sub => sub.Subject)
+				.Include(mod => mod.Module)
+				.Include(sem => sem.Semester)
+				.Where(s => s.SemesterId == semesterId && s.ModuleId == moduleId)
+				.Select(slot => slot.Subject)
+				.Distinct()
+				.ToList();
+
+			return queryResult;
 		}
 	}
 }

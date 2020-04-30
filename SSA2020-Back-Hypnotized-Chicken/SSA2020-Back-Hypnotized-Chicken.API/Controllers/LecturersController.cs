@@ -30,5 +30,38 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
             return Ok(lecturerMapResult);
         }
+
+        [HttpGet("by_subject")]
+        public async Task<ActionResult<List<LecturerDTO>>> GetBySemesterModuleSubject([FromQuery] short subjectId, short moduleId, short semesterId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Not all of the needed information is supplied.");
+            }
+
+            var validateSemesterId = await UnitOfWork.SemestersRepository.CheckIfSemesterExistsAsync(semesterId);
+            var validateSubjectId = await UnitOfWork.SubjectsRepository.CheckIfSubjectExistsAsync(subjectId);
+            var validateModuleId = await UnitOfWork.ModulesRepository.CheckIfModuleExistsAsync(moduleId);
+            
+            if (!validateSemesterId ||
+                !validateModuleId ||
+                !validateSubjectId)
+            {
+                return BadRequest("No semester or module or subject by the given id exist.");
+            }
+            
+            var lecturers = await UnitOfWork.LecturersRepository
+                .GetLecturersBySemesterModuleSubjectAsync(subjectId, moduleId, semesterId);
+
+            if (lecturers == null ||
+                !lecturers.Any())
+            {
+                return NoContent();
+            }
+
+            var lecturerMapResult = Mapper.Map<List<Lecturer>, List<LecturerDTO>>(lecturers);
+
+            return Ok(lecturerMapResult);
+        }
     }
 }
