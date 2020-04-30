@@ -9,6 +9,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
 		Task<bool> CheckIfSemesterExistsAsync(short id);
 		bool CheckIfSemesterExists(short id);
         List<Semester> GetSemesters();
+        Semester GetSemesterById(int id);
         Task<List<Semester>> GetSemestersAsync();
     }
 }

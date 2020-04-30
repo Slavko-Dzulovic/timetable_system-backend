@@ -30,7 +30,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules
         {
             return _dbContext.Modules.ToList();
         }
-
+        public Module GetModuleById(int id)
+        {
+            return _dbContext.Modules.FirstOrDefault(m => m.Id == id);
+        }
         public async Task<List<Module>> GetModulesAsync()
         {
             return await _dbContext.Modules.ToListAsync();

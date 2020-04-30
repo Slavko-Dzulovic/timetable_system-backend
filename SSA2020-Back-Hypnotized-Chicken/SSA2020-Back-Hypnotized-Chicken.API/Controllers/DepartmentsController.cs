@@ -30,5 +30,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
             return Ok(departmentMapResult);
         }
+        [HttpGet("{id}")]
+        public DepartmentDTO GetById(int id)
+        {
+            var department = UnitOfWork.DepartmentsRepository.GetDepartmentById(id);
+
+            var departmentMapResult = Mapper.Map<Department, DepartmentDTO>(department);
+            return departmentMapResult;
+        }
+
     }
 }
