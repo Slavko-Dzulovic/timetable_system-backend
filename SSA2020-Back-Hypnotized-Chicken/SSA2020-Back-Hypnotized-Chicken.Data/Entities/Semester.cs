@@ -30,7 +30,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Name { get; set; }
 
-		public Schedule Schedule { get; set; }
+		public ICollection<Schedule> Schedules { get; set; }
 		public ICollection<Slot> Slots { get; set; }
 	}
 }
