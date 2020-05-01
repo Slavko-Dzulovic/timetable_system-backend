@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -26,7 +27,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[MaxLength(255)]
 		public string Name { get; set; }
 		
-		public Schedule Schedule { get; set; }
+		public ICollection<Schedule> Schedules { get; set; }
 		public ICollection<Module> Modules { get; set; }
 	}
 }

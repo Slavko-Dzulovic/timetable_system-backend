@@ -26,6 +26,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Schedule>()
+                .HasIndex(a => new { a.DepartmentId, a.SemesterId}).IsUnique();
         }
 
         public override int SaveChanges()

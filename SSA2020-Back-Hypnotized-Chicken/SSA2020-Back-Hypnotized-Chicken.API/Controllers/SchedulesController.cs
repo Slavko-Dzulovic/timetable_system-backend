@@ -57,5 +57,32 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return Created(string.Empty, scheduleMapResult);
 		}
+
+		[HttpPut]
+		public async Task<ActionResult<ScheduleDTO>> Put([FromBody]ScheduleEditObject data)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest("Not all of the needed information is supplied.");
+			}
+
+			var validateScheduleId = await UnitOfWork.SchedulesRepository.CheckIfScheduleExistsAsync(data.Id);
+
+			if (!validateScheduleId)
+			{
+				return BadRequest("No schedule by the given id exist.");
+			}
+
+			var editSchedule = await UnitOfWork.SchedulesRepository.EditScheduleAsync(data.Id, data.Name);
+
+			if (editSchedule == null)
+			{
+				return Conflict();
+			}
+
+			var scheduleMapResult = Mapper.Map<Schedule, ScheduleDTO>(editSchedule);
+
+			return Ok(scheduleMapResult);
+		}
 	}
 }
