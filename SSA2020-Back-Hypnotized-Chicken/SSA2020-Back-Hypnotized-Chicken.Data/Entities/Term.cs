@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
@@ -12,7 +13,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 
 		[Required]
 		[Column("time", Order = 1)]
-		public int Time { get; set; }
+		public DateTime Time { get; set; }
 
 		[Column("group", Order = 2)]
 		public short Group { get; set; }
