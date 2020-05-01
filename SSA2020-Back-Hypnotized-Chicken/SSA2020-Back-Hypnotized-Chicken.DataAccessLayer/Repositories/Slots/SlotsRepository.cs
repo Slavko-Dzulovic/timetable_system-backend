@@ -42,5 +42,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 
 			return queryResult;
 		}
+		public async Task<bool> CheckIfSlotExistsAsync(long id)
+		{
+			return await _dbContext.Slots.AnyAsync(s => s.Id == id);
+		}
 	}
 }

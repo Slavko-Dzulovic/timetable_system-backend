@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200501191322_AddTimeColumnInTermsTable")]
+    partial class AddTimeColumnInTermsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,10 +166,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.Property<short>("DepartmentId")
                         .HasColumnName("department_id")
                         .HasColumnType("smallint");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnName("is_active")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()

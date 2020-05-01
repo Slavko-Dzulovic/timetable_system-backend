@@ -7,6 +7,8 @@ using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Weekdays;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 {
@@ -20,7 +22,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
         ISemestersRepository SemestersRepository { get; }
 		IModulesRepository ModulesRepository { get; }
 		ISlotsRepository SlotsRepository { get;  }
-
+		ITermsRepository TermsRepository { get; }
+		IWeekdaysRepository WeekdaysRepository { get; }
 		/// <summary>
 		/// Save context changes async
 		/// </summary>
