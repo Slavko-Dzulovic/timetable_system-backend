@@ -50,6 +50,34 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			return schedule;
 		}
 
+		public async Task<bool> SetInactiveAsync(short id)
+		{
+			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id);
+			if (schedule == null)
+			{
+				return false;
+			}
+
+			schedule.IsActive = false;
+			_dbContext.Schedules.Update(schedule);
+
+			return true;
+		}
+
+		public bool SetInactive(short id)
+		{
+			var schedule = _dbContext.Schedules.FirstOrDefault(sch => sch.Id == id);
+			if (schedule == null)
+			{
+				return false;
+			}
+
+			schedule.IsActive = false;
+			_dbContext.Schedules.Update(schedule);
+
+			return true;
+		}
+
 		public async Task<Schedule> EditScheduleAsync(short id, string name)
 		{
 			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id);
