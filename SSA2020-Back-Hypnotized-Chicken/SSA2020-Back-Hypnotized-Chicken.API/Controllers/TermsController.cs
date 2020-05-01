@@ -76,5 +76,34 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return Created(string.Empty, termMapResult);
 		}
+
+		[HttpPut]
+		public async Task<ActionResult<TermDTO>> Put([FromBody]TermEditObject data)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest("Not all of the needed information is supplied.");
+			}
+
+			var validateTermId = await UnitOfWork.TermsRepository.CheckIfTermExistsAsync(data.Id);
+
+			if (!validateTermId)
+			{
+				return BadRequest("No term by the given id exists.");
+			}
+
+			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.Time, data.Group, data.Module, 
+				data.OptionalSubjectNumber, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
+				data.WeekdayId, data.ClassroomId);
+
+			if (editTerm == null)
+			{
+				return Conflict();
+			}
+
+			var termMapResult = Mapper.Map<Term, TermDTO>(editTerm);
+
+			return Ok(termMapResult);
+		}
 	}
 }
