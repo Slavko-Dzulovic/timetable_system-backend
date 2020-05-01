@@ -25,10 +25,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[Required]
 		[Column("department_id", Order = 3)]
 		public short DepartmentId { get; set; }
-		
+
 		[ForeignKey("DepartmentId")]
 		public Department Department { get; set; }
 
+		[Required]
+		[Column("is_active", Order = 4)]
+		public bool IsActive { get; set; }
+		
 		public ICollection<Term> Terms { get; set; }
 	}
 }
