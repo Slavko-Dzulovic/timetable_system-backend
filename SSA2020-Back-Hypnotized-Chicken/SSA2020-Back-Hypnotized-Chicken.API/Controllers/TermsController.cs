@@ -92,7 +92,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No term by the given id exists.");
 			}
 
-			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.Time, data.Group, data.Module, 
+			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.Time, data.Group, data.Module,
 				data.OptionalSubjectNumber, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
 				data.WeekdayId, data.ClassroomId);
 
@@ -104,6 +104,22 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var termMapResult = Mapper.Map<Term, TermDTO>(editTerm);
 
 			return Ok(termMapResult);
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<ActionResult<TermDTO>> Delete([FromRoute] short id)
+		{
+			var validateTermId = await UnitOfWork.TermsRepository.CheckIfTermExistsAsync(id);
+			var deletedTermId = await UnitOfWork.TermsRepository.DeleteTermAsync(id);
+			if (deletedTermId == 0)
+			{
+				return BadRequest("Error deleting term.");
+			}
+
+			await UnitOfWork.SaveChangesAsync();
+
+			return Ok();
+
 		}
 	}
 }
