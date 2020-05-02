@@ -87,5 +87,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		{
 			return await _dbContext.Terms.AnyAsync(t => t.Id == id);
 		}
+
+		public async Task<short> DeleteTermAsync(short id)
+		{
+			var term = _dbContext.Terms.FirstOrDefault(t => t.Id == id);
+			if (term == null)
+			{
+				return 0;
+			}
+
+			_dbContext.Terms.Remove(term);
+			await _dbContext.SaveChangesAsync();
+			return id;
+
+		}
 	}
 }
