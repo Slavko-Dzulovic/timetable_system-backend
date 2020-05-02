@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
-namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
+namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 {
-	public class TermDTO
+	public class TermEditObject
 	{
+		[Required]
 		[JsonProperty("id")]
 		public short Id { get; set; }
 
+		[Required]
 		[JsonProperty("time")]
 		public DateTime Time { get; set; }
 
@@ -29,5 +32,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 		[JsonProperty("number_of_lab_exercises")]
 		public short NumberOfLabExercises { get; set; }
 
+		[Required]
+		[JsonProperty("weekday_id")]
+		public short WeekdayId { get; set; }
+		[Required]
+		[JsonProperty("classroom_id")]
+		public short ClassroomId { get; set; }
 	}
 }
