@@ -38,5 +38,15 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules
         {
             return await _dbContext.Modules.ToListAsync();
         }
+
+        public async Task<List<Module>> GetModulesByDepartmentAsync(short departmentId)
+        {
+            return await _dbContext.Modules.Where(m => m.DepartmentId == departmentId).ToListAsync();
+        }
+
+        public List<Module> GetModulesByDepartment(short departmentId)
+        {
+            return _dbContext.Modules.Where(m => m.DepartmentId == departmentId).ToList();
+        }
     }
 }
