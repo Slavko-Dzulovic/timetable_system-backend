@@ -20,5 +20,15 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Weekdays
 		{
 			return await _dbContext.Weekdays.AnyAsync(wd => wd.Id == id);
 		}
+
+		public async Task<List<Weekday>> GetAllWeekdaysAsync()
+		{
+			return await _dbContext.Weekdays.ToListAsync();
+		}
+
+		public List<Weekday> GetAllWeekdays()
+		{
+			return _dbContext.Weekdays.ToList();
+		}
 	}
 }
