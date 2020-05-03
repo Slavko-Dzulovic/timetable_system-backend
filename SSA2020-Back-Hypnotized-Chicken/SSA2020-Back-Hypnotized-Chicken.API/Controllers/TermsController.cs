@@ -146,5 +146,26 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return termsMapResult;
 		}
+		
+		[HttpGet("by_schedule")]
+		public async Task<ActionResult<List<TermDTO>>> GetBySchedule(short scheduleId)
+		{
+			var validateScheduleId = await UnitOfWork.SchedulesRepository.CheckIfScheduleExistsAsync(scheduleId);
+			if (!validateScheduleId)
+			{
+				return BadRequest("No such schedule exists.");
+			}
+
+			var terms = await UnitOfWork.TermsRepository.GetTermsByScheduleAsync(scheduleId);
+			if (terms == null ||
+			    !terms.Any())
+			{
+				return NoContent();
+			}
+
+			var termsMapResult = Mapper.Map<List<Term>, List<TermDTO>>(terms);
+
+			return termsMapResult;
+		}
 	}
 }
