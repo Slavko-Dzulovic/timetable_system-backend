@@ -28,7 +28,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 					options => options.MapFrom(source => source.NumberOfExercises))
 				.ForMember(
 					destination => destination.NumberOfLabExercises,
-					options => options.MapFrom(source => source.NumberOfLabExercises));
+					options => options.MapFrom(source => source.NumberOfLabExercises))
+				.ForMember(
+					destination => destination.Classroom,
+					options => options.MapFrom(source => source.Classroom.Label))
+				.ForMember(
+					destination => destination.OptionalSubjectNumber,
+					options => options.MapFrom(source => source.Slot.OptionalSubjectNumber));
 		}
 	}
 }

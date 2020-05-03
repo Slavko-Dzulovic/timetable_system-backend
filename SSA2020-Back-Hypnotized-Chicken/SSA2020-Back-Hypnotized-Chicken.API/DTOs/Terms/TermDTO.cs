@@ -29,5 +29,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 		[JsonProperty("number_of_lab_exercises")]
 		public short NumberOfLabExercises { get; set; }
 
+		[JsonProperty("classroom")]
+		public string Classroom { get; set; }
 	}
 }

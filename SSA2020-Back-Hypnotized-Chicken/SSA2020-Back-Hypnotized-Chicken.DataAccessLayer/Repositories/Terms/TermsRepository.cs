@@ -99,5 +99,15 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 			return id;
 
 		}
+
+		public async Task<List<Term>> GetTermsByWeekdayAsync(short weekdayId)
+		{
+			return await _dbContext.Terms.Where(t => t.WeekdayId == weekdayId).ToListAsync();
+		}
+
+		public List<Term> GetTermsByWeekday(short weekdayId)
+		{
+			return _dbContext.Terms.Where(t => t.WeekdayId == weekdayId).ToList();
+		}
 	}
 }
