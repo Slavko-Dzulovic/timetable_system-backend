@@ -108,6 +108,21 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			return Ok(scheduleMapResult);
 		}
 
+		[HttpGet]
+		public async Task<ActionResult<List<ScheduleDTO>>> Get()
+		{
+			var schedules = await UnitOfWork.SchedulesRepository.GetAllActiveSchedulesAsync();
+			if (schedules == null ||
+			    !schedules.Any())
+			{
+				return NoContent();
+			}
+
+			var scheduleMapResult = Mapper.Map<List<Schedule>, List<ScheduleDTO>>(schedules);
+
+			return Ok(scheduleMapResult);
+		}
+
 		[HttpGet("by_semester")]
 		public async Task<ActionResult<List<ScheduleDTO>>> GetActiveBySemester([FromQuery] short semesterId)
 		{

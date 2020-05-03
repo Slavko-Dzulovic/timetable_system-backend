@@ -104,9 +104,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public List<Schedule> GetActiveSchedulesByDepartment(short departmentId)
 		{
-			var query = _dbContext.Schedules.Where(s => s.DepartmentId == departmentId &&
-			                                                  s.IsActive).ToList();
+			var query = _dbContext.Schedules.Where(s => s.DepartmentId == departmentId && 
+			                                            s.IsActive).ToList();
 			return query;
+		}
+
+		public async Task<List<Schedule>> GetAllActiveSchedulesAsync()
+		{
+			return await _dbContext.Schedules.Where(s => s.IsActive).ToListAsync();
+		}
+
+		public List<Schedule> GetAllActiveSchedules()
+		{
+			return _dbContext.Schedules.Where(s => s.IsActive).ToList();
 		}
 
 		public async Task<Schedule> EditScheduleAsync(short id, string name)
