@@ -15,5 +15,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 			short noExercises, short noLabExercises, short weekdayId, short classroomId);
 		Task<bool> CheckIfTermExistsAsync(short id);
 		Task<short> DeleteTermAsync(short id);
+		Task<List<Term>> GetTermsByWeekdayAsync(short weekdayId);
+		List<Term> GetTermsByWeekday(short weekdayId);
 	}
 }

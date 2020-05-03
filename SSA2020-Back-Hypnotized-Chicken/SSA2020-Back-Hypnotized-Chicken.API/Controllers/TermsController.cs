@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -108,6 +110,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 		public async Task<ActionResult<TermDTO>> Delete([FromRoute] short id)
 		{
 			var validateTermId = await UnitOfWork.TermsRepository.CheckIfTermExistsAsync(id);
+			if (!validateTermId)
+			{
+				return BadRequest("No term with such id exists.");
+			}
+			
 			var deletedTermId = await UnitOfWork.TermsRepository.DeleteTermAsync(id);
 			if (deletedTermId == 0)
 			{
@@ -117,7 +124,27 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			await UnitOfWork.SaveChangesAsync();
 
 			return Ok();
+		}
 
+		[HttpGet("by_weekday")]
+		public async Task<ActionResult<List<TermDTO>>> GetByWeekday(short weekdayId)
+		{
+			var validateWeekdayId = await UnitOfWork.WeekdaysRepository.CheckIfWeekdayExistsAsync(weekdayId);
+			if (!validateWeekdayId)
+			{
+				return BadRequest("No such weekday exists.");
+			}
+
+			var terms = await UnitOfWork.TermsRepository.GetTermsByWeekdayAsync(weekdayId);
+			if (terms == null ||
+			    !terms.Any())
+			{
+				return NoContent();
+			}
+
+			var termsMapResult = Mapper.Map<List<Term>, List<TermDTO>>(terms);
+
+			return termsMapResult;
 		}
 	}
 }
