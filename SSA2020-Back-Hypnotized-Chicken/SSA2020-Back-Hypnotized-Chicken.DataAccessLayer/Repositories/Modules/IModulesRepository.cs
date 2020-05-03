@@ -11,5 +11,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Modules
         List<Module> GetModules();
         Module GetModuleById(int id);
         Task<List<Module>> GetModulesAsync();
+        Task<List<Module>> GetModulesByDepartmentAsync(short departmentId);
+        List<Module> GetModulesByDepartment(short departmentId);
     }
 }
