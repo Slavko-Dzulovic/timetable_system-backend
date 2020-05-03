@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -52,7 +53,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public async Task<bool> SetInactiveAsync(short id)
 		{
-			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id);
+			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id &&
+			                                                                     sch.IsActive);
 			if (schedule == null)
 			{
 				return false;
@@ -66,7 +68,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public bool SetInactive(short id)
 		{
-			var schedule = _dbContext.Schedules.FirstOrDefault(sch => sch.Id == id);
+			var schedule = _dbContext.Schedules.FirstOrDefault(sch => sch.Id == id &&
+			                                                          sch.IsActive);
 			if (schedule == null)
 			{
 				return false;
@@ -76,6 +79,34 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			_dbContext.Schedules.Update(schedule);
 
 			return true;
+		}
+
+		public async Task<List<Schedule>> GetActiveSchedulesBySemesterAsync(short semesterId)
+		{
+			var query = await _dbContext.Schedules.Where(s => s.SemesterId == semesterId && 
+			                                                  s.IsActive).ToListAsync();
+			return query;
+		}
+
+		public List<Schedule> GetActiveSchedulesBySemester(short semesterId)
+		{
+			var query = _dbContext.Schedules.Where(s => s.SemesterId == semesterId && 
+			                                            s.IsActive).ToList();
+			return query;
+		}
+
+		public async Task<List<Schedule>> GetActiveSchedulesByDepartmentAsync(short departmentId)
+		{
+			var query = await _dbContext.Schedules.Where(s => s.DepartmentId == departmentId && 
+			                                                  s.IsActive).ToListAsync();
+			return query;
+		}
+
+		public List<Schedule> GetActiveSchedulesByDepartment(short departmentId)
+		{
+			var query = _dbContext.Schedules.Where(s => s.DepartmentId == departmentId &&
+			                                                  s.IsActive).ToList();
+			return query;
 		}
 
 		public async Task<Schedule> EditScheduleAsync(short id, string name)

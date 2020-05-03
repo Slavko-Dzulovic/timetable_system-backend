@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
@@ -13,5 +14,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 		Schedule AddNewSchedule(Schedule schedule);
 		Task<bool> SetInactiveAsync(short id);
 		bool SetInactive(short id);
+		Task<List<Schedule>> GetActiveSchedulesBySemesterAsync(short semesterId);
+		List<Schedule> GetActiveSchedulesBySemester(short semesterId);
+		Task<List<Schedule>> GetActiveSchedulesByDepartmentAsync(short departmentId);
+		List<Schedule> GetActiveSchedulesByDepartment(short departmentId);
 	}
 }

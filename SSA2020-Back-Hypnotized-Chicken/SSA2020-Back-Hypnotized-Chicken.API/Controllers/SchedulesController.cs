@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -102,6 +104,51 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			}
 
 			var scheduleMapResult = Mapper.Map<Schedule, ScheduleDTO>(editSchedule);
+
+			return Ok(scheduleMapResult);
+		}
+
+		[HttpGet("by_semester")]
+		public async Task<ActionResult<List<ScheduleDTO>>> GetActiveBySemester([FromQuery] short semesterId)
+		{
+			var validateSemesterId = await UnitOfWork.SemestersRepository.CheckIfSemesterExistsAsync(semesterId);
+			if (!validateSemesterId)
+			{
+				return BadRequest("No semester by the given id exists.");
+			}
+
+			var schedules = await UnitOfWork.SchedulesRepository
+				.GetActiveSchedulesBySemesterAsync(semesterId);
+
+			if (schedules == null ||
+			    !schedules.Any())
+			{
+				return NoContent();
+			}
+
+			var scheduleMapResult = Mapper.Map<List<Schedule>, List<ScheduleDTO>>(schedules);
+
+			return Ok(scheduleMapResult);
+		}
+
+		[HttpGet("by_department")]
+		public async Task<ActionResult<List<ScheduleDTO>>> GetActiveByDepartment([FromQuery] short departmentId)
+		{
+			var validateDepartmentId = await UnitOfWork.DepartmentsRepository.CheckIfDepartmentExistsAsync(departmentId);
+			if (!validateDepartmentId)
+			{
+				return BadRequest("No department by the given id exists.");
+			}
+
+			var schedules = await UnitOfWork.SchedulesRepository.GetActiveSchedulesByDepartmentAsync(departmentId);
+
+			if (schedules == null ||
+			    !schedules.Any())
+			{
+				return NoContent();
+			}
+
+			var scheduleMapResult = Mapper.Map<List<Schedule>, List<ScheduleDTO>>(schedules);
 
 			return Ok(scheduleMapResult);
 		}
