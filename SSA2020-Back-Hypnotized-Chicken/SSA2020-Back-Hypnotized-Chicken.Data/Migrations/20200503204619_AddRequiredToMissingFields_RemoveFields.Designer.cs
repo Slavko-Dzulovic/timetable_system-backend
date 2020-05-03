@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200503204619_AddRequiredToMissingFields_RemoveFields")]
+    partial class AddRequiredToMissingFields_RemoveFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -335,12 +337,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnName("number_of_lectures")
                         .HasColumnType("smallint");
 
-                    b.Property<short>("ScheduleId")
-                        .HasColumnName("schedule_id")
+                    b.Property<short?>("ScheduleId")
                         .HasColumnType("smallint");
 
-                    b.Property<long>("SlotId")
-                        .HasColumnName("slot_id")
+                    b.Property<long?>("SlotId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("Time")
@@ -454,17 +454,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Schedule", "Schedule")
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Schedule", null)
                         .WithMany("Terms")
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ScheduleId");
 
-                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Slot", "Slot")
+                    b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Slot", null)
                         .WithMany("Terms")
-                        .HasForeignKey("SlotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SlotId");
 
                     b.HasOne("SSA2020_Back_Hypnotized_Chicken.Data.Entities.Weekday", "Weekday")
                         .WithMany("Terms")
