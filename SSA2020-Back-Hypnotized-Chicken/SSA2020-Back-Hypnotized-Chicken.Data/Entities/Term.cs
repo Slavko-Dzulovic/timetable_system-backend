@@ -20,39 +20,38 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		
 		[Column("module", Order = 3)]
 		public string Module { get; set; }
-		
-		[Column("optional_subject_number", Order = 4)]
-		public short OptionalSubjectNumber { get; set; }
-		
-		[Column("number_of_lectures", Order = 5)]
+
+		[Column("number_of_lectures", Order = 4)]
 		public short NumberOfLectures { get; set; }
 
-		[Column("number_of_exercises", Order = 6)]
+		[Column("number_of_exercises", Order = 5)]
 		public short NumberOfExercises { get; set; }
 		
-		[Column("number_of_lab_exercises", Order = 7)]
+		[Column("number_of_lab_exercises", Order = 6)]
 		public short NumberOfLabExercises { get; set; }
 		
 		[Required]
-		[Column("weekday_id", Order = 8)]
+		[Column("weekday_id", Order = 7)]
 		public short WeekdayId { get; set; }
 		
 		[ForeignKey("WeekdayId")]
 		public Weekday Weekday { get; set; }
 		
 		[Required]
-		[Column("classroom_id", Order = 9)]
+		[Column("classroom_id", Order = 8)]
 		public short ClassroomId { get; set; }
-
+		
 		[ForeignKey("ClassroomId")]
 		public Classroom Classroom { get; set; }
 		
-		[Column("schedule_id", Order = 10)]
+		[Required]
+		[Column("schedule_id", Order = 9)]
 		public short ScheduleId { get; set; }
 		
 		[ForeignKey("ScheduleId")]
 		public Schedule Schedule { get; set; }
 		
+		[Required]
 		[Column("slot_id", Order = 10)]
 		public long SlotId { get; set; }
 		

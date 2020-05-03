@@ -54,7 +54,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 					Time = term.Time,
 					Group = term.Group,
 					Module = term.Module,
-					OptionalSubjectNumber = term.OptionalSubjectNumber,
 					NumberOfLectures = term.NumberOfLectures,
 					NumberOfExercises = term.NumberOfExercises,
 					NumberOfLabExercises = term.NumberOfLabExercises,
@@ -92,8 +91,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No term by the given id exists.");
 			}
 
-			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.Time, data.Group, data.Module,
-				data.OptionalSubjectNumber, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
+			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.Time, data.Group, data.Module, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
 				data.WeekdayId, data.ClassroomId);
 
 			if (editTerm == null)

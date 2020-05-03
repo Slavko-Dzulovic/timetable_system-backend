@@ -43,6 +43,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[Column("is_optional", Order = 5)]
 		public bool IsOptional { get; set; }
 		
+		[Column("optional_subject_number", Order = 5)]
+		public short OptionalSubjectNumber { get; set; }
+		
 		public ICollection<Term> Terms { get; set; }
 	}
 }

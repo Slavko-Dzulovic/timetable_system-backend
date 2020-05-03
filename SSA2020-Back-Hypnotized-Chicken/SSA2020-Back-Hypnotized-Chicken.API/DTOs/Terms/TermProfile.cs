@@ -21,9 +21,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 					destination => destination.Module,
 					options => options.MapFrom(source => source.Module))
 				.ForMember(
-					destination => destination.OptionalSubjectNumber,
-					options => options.MapFrom(source => source.OptionalSubjectNumber))
-				.ForMember(
 					destination => destination.NumberOfLectures,
 					options => options.MapFrom(source => source.NumberOfLectures))
 				.ForMember(
