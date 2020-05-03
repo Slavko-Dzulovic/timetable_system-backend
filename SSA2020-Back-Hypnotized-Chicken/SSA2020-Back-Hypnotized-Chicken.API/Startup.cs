@@ -19,6 +19,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 		}
 
 		public IConfiguration Configuration { get; }
+		private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -37,6 +39,15 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+			});
+			
+			services.AddCors(options =>
+			{
+				options.AddPolicy(name: MyAllowSpecificOrigins,
+					builder =>
+					{
+						builder.WithOrigins("http://localhost:4200");
+					});
 			});
 		}
 
@@ -65,6 +76,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
 			});
 
+			app.UseCors(MyAllowSpecificOrigins);
+				
 			app.UseRouting();
 			
 			app.UseAuthorization();
