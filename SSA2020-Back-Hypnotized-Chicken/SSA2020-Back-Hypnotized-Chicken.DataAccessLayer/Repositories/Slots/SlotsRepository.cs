@@ -46,5 +46,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 		{
 			return await _dbContext.Slots.AnyAsync(s => s.Id == id);
 		}
+
+		public long GetSlotIdByAllForeignKeys(short subjectId, short moduleId, short semesterId, short lecturerId)
+		{
+			var slotId = _dbContext.Slots
+				.Include(sub => sub.Subject)
+				.Include(mod => mod.Module)
+				.Include(sem => sem.Semester)
+				.Include(lec => lec.Lecturer)
+				.Where(s => s.SubjectId == subjectId && s.ModuleId == moduleId && s.SemesterId == semesterId && s.LecturerId == lecturerId)
+				.Select(slot => slot.Id)
+				.Single();
+
+			return slotId;
+		}
 	}
 }

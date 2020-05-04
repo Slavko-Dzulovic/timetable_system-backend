@@ -12,14 +12,17 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 					destination => destination.Id,
 					options => options.MapFrom(source => source.Id))
 				.ForMember(
-					destination => destination.Time,
-					options => options.MapFrom(source => source.Time))
+					destination => destination.StartTime,
+					options => options.MapFrom(source => source.StartTime))
+				.ForMember(
+					destination => destination.EndTime,
+					options => options.MapFrom(source => source.EndTime))
 				.ForMember(
 					destination => destination.Group,
 					options => options.MapFrom(source => source.Group))
 				.ForMember(
 					destination => destination.Module,
-					options => options.MapFrom(source => source.Module))
+					options => options.MapFrom(source => source.Slot.Module.Name))
 				.ForMember(
 					destination => destination.NumberOfLectures,
 					options => options.MapFrom(source => source.NumberOfLectures))
