@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200504221245_ActuallyAddedTimeColumnInTermsBecauseLastTimeIForgotToSave")]
+    partial class ActuallyAddedTimeColumnInTermsBecauseLastTimeIForgotToSave
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,15 +310,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<short>("ClassroomId")
-                        .HasColumnName("classroomId")
+                        .HasColumnName("classroom_id")
                         .HasColumnType("smallint");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnName("created_at")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnName("endTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<short>("Group")
@@ -328,35 +326,35 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<short>("NumberOfExercises")
-                        .HasColumnName("numberOfExercises")
+                        .HasColumnName("number_of_exercises")
                         .HasColumnType("smallint");
 
                     b.Property<short>("NumberOfLabExercises")
-                        .HasColumnName("numberOfLabExercises")
+                        .HasColumnName("number_of_lab_exercises")
                         .HasColumnType("smallint");
 
                     b.Property<short>("NumberOfLectures")
-                        .HasColumnName("numberOfLectures")
+                        .HasColumnName("number_of_lectures")
                         .HasColumnType("smallint");
 
                     b.Property<short>("ScheduleId")
-                        .HasColumnName("scheduleId")
+                        .HasColumnName("schedule_id")
                         .HasColumnType("smallint");
 
                     b.Property<long>("SlotId")
-                        .HasColumnName("slotId")
+                        .HasColumnName("slot_id")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnName("startTime")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnName("time")
+                        .HasColumnType("interval");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnName("updated_at")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<short>("WeekdayId")
-                        .HasColumnName("weekdayId")
+                        .HasColumnName("weekday_id")
                         .HasColumnType("smallint");
 
                     b.HasKey("Id");

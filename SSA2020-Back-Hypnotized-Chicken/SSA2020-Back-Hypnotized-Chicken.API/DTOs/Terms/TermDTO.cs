@@ -8,8 +8,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 		[JsonProperty("id")]
 		public short Id { get; set; }
 
-		[JsonProperty("time")]
-		public DateTime Time { get; set; }
+		[JsonProperty("startTime")]
+		public DateTime StartTime { get; set; }
+
+		[JsonProperty("endTime")]
+		public DateTime EndTime { get; set; }
 
 		[JsonProperty("group")]
 		public short Group { get; set; }

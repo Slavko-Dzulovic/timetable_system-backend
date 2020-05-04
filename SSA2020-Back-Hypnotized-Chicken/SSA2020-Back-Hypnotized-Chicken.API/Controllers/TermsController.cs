@@ -28,9 +28,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("Not all of the needed information is supplied.");
 			}
 
+			var slotId = UnitOfWork.SlotsRepository.GetSlotIdByAllForeignKeys(term.SubjectId, term.ModuleId, term.SemesterId, term.LecturerId);
+			var module = UnitOfWork.ModulesRepository.GetModuleById(term.ModuleId).Name;
+
 			var validateWeekdayId = await UnitOfWork.WeekdaysRepository.CheckIfWeekdayExistsAsync(term.WeekdayId);
 			var validateClassroomId = await UnitOfWork.ClassroomsRepository.CheckIfClassroomExistsAsync(term.ClassroomId);
-			var validateSlotId = await UnitOfWork.SlotsRepository.CheckIfSlotExistsAsync(term.SlotId);
+			var validateSlotId = await UnitOfWork.SlotsRepository.CheckIfSlotExistsAsync(slotId);
 			var validateScheduleId = await UnitOfWork.SchedulesRepository.CheckIfScheduleExistsAsync(term.ScheduleId);
 
 			if (!validateWeekdayId)
@@ -53,16 +56,17 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var savedTerm = await UnitOfWork.TermsRepository.AddNewTermAsync(
 				new Term
 				{
-					Time = term.Time,
+					StartTime = term.StartTime,
+					EndTime = term.EndTime,
 					Group = term.Group,
-					Module = term.Module,
+					Module = module,
 					NumberOfLectures = term.NumberOfLectures,
 					NumberOfExercises = term.NumberOfExercises,
 					NumberOfLabExercises = term.NumberOfLabExercises,
 					WeekdayId = term.WeekdayId,
 					ClassroomId = term.ClassroomId,
 					ScheduleId = term.ScheduleId,
-					SlotId = term.SlotId
+					SlotId = slotId
 				}
 			);
 
@@ -93,7 +97,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No term by the given id exists.");
 			}
 
-			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.Time, data.Group, data.Module, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
+			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.StartTime, data.EndTime, data.Group, data.Module, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
 				data.WeekdayId, data.ClassroomId);
 
 			if (editTerm == null)

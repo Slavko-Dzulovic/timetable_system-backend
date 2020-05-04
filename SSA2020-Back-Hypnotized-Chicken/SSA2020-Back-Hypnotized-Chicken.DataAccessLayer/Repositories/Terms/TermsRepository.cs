@@ -39,7 +39,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 			return term;
 		}
 
-		public async Task<Term> EditTermAsync(short id, DateTime time, short group, string module, short noLectures, 
+		public async Task<Term> EditTermAsync(short id, DateTime startTime, DateTime endTime, short group, string module, short noLectures, 
 			short noExercises, short noLabExercises, short weekdayId, short classroomId)
 		{
 			var term = await _dbContext.Terms.FirstOrDefaultAsync(t => t.Id == id);
@@ -48,19 +48,20 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 				return null;
 			}
 
-			term.Time = time;
+			term.StartTime = startTime;
+			term.EndTime = endTime;
 			term.Group = group;
 			term.Module = module;
 			term.NumberOfLectures = noLectures;
 			term.NumberOfExercises = noExercises;
-			term.NumberOfLabExercises = noLectures;
+			term.NumberOfLabExercises = noLabExercises;
 			term.WeekdayId = weekdayId;
 			term.ClassroomId = classroomId;
 
 			return await _dbContext.SaveChangesAsync() > 0 ? term : null;
 		}
 
-		public Term EditTerm(short id, DateTime time, short group, string module, short noLectures, 
+		public Term EditTerm(short id, DateTime startTime, DateTime endTime, short group, string module, short noLectures, 
 			short noExercises, short noLabExercises, short weekdayId, short classroomId)
 		{
 			var term = _dbContext.Terms.FirstOrDefault(t => t.Id == id);
@@ -69,7 +70,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 				return null;
 			}
 
-			term.Time = time;
+			term.StartTime = startTime;
+			term.EndTime = endTime;
 			term.Group = group;
 			term.Module = module;
 			term.NumberOfLectures = noLectures;

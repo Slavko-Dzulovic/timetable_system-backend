@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SSA2020_Back_Hypnotized_Chicken.Data;
@@ -9,9 +10,10 @@ using SSA2020_Back_Hypnotized_Chicken.Data;
 namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 {
     [DbContext(typeof(TimetableDbContext))]
-    partial class TimetableDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200504225041_DeletedStartAndEndTimeFromTermsBecauseLastTimeIPutTheWrongDataType")]
+    partial class DeletedStartAndEndTimeFromTermsBecauseLastTimeIPutTheWrongDataType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,10 +317,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnName("created_at")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnName("endTime")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<short>("Group")
                         .HasColumnName("group")
                         .HasColumnType("smallint");
@@ -346,10 +344,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     b.Property<long>("SlotId")
                         .HasColumnName("slotId")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnName("startTime")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnName("updated_at")

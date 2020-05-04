@@ -11,17 +11,18 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		public short Id { get; set; }
 
 		[Required]
-		[JsonProperty("time")]
-		public DateTime Time { get; set; }
+		[JsonProperty("startTime")]
+		public DateTime StartTime { get; set; }
+
+		[Required]
+		[JsonProperty("endTime")]
+		public DateTime EndTime { get; set; }
 
 		[JsonProperty("group")]
 		public short Group { get; set; }
 
 		[JsonProperty("module")]
 		public string Module { get; set; }
-
-		[JsonProperty("optional_subject_number")]
-		public short OptionalSubjectNumber { get; set; }
 
 		[JsonProperty("number_of_lectures")]
 		public short NumberOfLectures { get; set; }
