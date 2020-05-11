@@ -60,5 +60,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return Ok(slotMapResult);
 		}
+		[HttpGet("{id}")]
+		public SubjectDTO GetById(short id)
+		{
+			var subject = UnitOfWork.SubjectsRepository.GetSubjectById(id);
+
+			var subjectMapResult = Mapper.Map<Subject, SubjectDTO>(subject);
+			return subjectMapResult;
+		}
 	}
 }
