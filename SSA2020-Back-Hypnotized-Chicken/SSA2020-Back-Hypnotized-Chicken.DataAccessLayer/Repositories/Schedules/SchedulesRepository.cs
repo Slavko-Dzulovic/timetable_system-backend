@@ -119,6 +119,18 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			return _dbContext.Schedules.Where(s => s.IsActive).ToList();
 		}
 
+		public async Task<Schedule> GetActiveScheduleByIdAsync(short id)
+		{
+			return await _dbContext.Schedules.FirstOrDefaultAsync(s => s.Id == id &&
+			                                                           s.IsActive);
+		}
+
+		public Schedule GetActiveScheduleById(short id)
+		{
+			return _dbContext.Schedules.FirstOrDefault(s => s.Id == id &&
+			                                                s.IsActive);
+		}
+
 		public async Task<Schedule> EditScheduleAsync(short id, string name)
 		{
 			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id);

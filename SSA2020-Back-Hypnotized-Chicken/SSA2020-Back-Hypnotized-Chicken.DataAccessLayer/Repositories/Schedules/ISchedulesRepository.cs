@@ -20,5 +20,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 		List<Schedule> GetActiveSchedulesByDepartment(short departmentId);
 		Task<List<Schedule>> GetAllActiveSchedulesAsync();
 		List<Schedule> GetAllActiveSchedules();
+		Task<Schedule> GetActiveScheduleByIdAsync(short id);
+		Schedule GetActiveScheduleById(short id);
 	}
 }
