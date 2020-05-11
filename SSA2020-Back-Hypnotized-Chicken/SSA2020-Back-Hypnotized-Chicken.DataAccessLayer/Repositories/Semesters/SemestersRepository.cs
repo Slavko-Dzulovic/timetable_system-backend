@@ -30,7 +30,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Semesters
             return _dbContext.Semesters.ToList();
         }
 
-        public Semester GetSemesterById(int id)
+        public Semester GetSemesterById(short id)
         {
             return _dbContext.Semesters.FirstOrDefault(s => s.Id == id);
         }

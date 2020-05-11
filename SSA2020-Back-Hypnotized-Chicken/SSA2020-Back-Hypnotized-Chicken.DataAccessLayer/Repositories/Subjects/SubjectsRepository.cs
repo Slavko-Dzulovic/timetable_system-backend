@@ -35,5 +35,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Subjects
 		{
 			return await _dbContext.Subjects.ToListAsync();
 		}
+		public Subject GetSubjectById(short id)
+		{
+			return _dbContext.Subjects.FirstOrDefault(s => s.Id == id);
+		}
 	}
 }

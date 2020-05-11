@@ -31,7 +31,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
             return Ok(semesterMapResult);
         }
         [HttpGet("{id}")]
-        public SemesterDTO GetById(int id)
+        public SemesterDTO GetById(short id)
         {
             var semester = UnitOfWork.SemestersRepository.GetSemesterById(id);
            

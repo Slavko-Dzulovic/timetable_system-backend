@@ -10,5 +10,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Subjects
 		bool CheckIfSubjectExists(short subjectId);
 		List<Subject> GetSubjects();
 		Task<List<Subject>> GetSubjectsAsync();
+		Subject GetSubjectById(short id);
 	}
 }
