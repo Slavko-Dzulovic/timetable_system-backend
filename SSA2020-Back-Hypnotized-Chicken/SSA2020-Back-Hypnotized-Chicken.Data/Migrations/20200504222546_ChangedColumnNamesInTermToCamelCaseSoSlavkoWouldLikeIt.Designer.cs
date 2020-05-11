@@ -310,7 +310,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<short>("ClassroomId")
-                        .HasColumnName("classroomId")
+                        .HasColumnName("classroom_id")
                         .HasColumnType("smallint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -318,7 +318,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<TimeSpan>("EndTime")
-                        .HasColumnName("endTime")
+                        .HasColumnName("end_time")
                         .HasColumnType("interval");
 
                     b.Property<short>("Group")
@@ -330,27 +330,27 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<short>("NumberOfExercises")
-                        .HasColumnName("numberOfExercises")
+                        .HasColumnName("number_of_exercises")
                         .HasColumnType("smallint");
 
                     b.Property<short>("NumberOfLabExercises")
-                        .HasColumnName("numberOfLabExercises")
+                        .HasColumnName("number_of_lab_exercises")
                         .HasColumnType("smallint");
 
                     b.Property<short>("NumberOfLectures")
-                        .HasColumnName("numberOfLectures")
+                        .HasColumnName("number_of_lectures")
                         .HasColumnType("smallint");
 
                     b.Property<short>("ScheduleId")
-                        .HasColumnName("scheduleId")
+                        .HasColumnName("schedule_id")
                         .HasColumnType("smallint");
 
                     b.Property<long>("SlotId")
-                        .HasColumnName("slotId")
+                        .HasColumnName("slot_id")
                         .HasColumnType("bigint");
 
                     b.Property<TimeSpan>("StartTime")
-                        .HasColumnName("startTime")
+                        .HasColumnName("start_time")
                         .HasColumnType("interval");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -358,7 +358,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<short>("WeekdayId")
-                        .HasColumnName("weekdayId")
+                        .HasColumnName("weekday_id")
                         .HasColumnType("smallint");
 
                     b.HasKey("Id");

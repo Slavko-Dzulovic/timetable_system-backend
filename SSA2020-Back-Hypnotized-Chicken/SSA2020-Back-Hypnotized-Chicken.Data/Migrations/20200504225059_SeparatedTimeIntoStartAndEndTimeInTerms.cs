@@ -8,13 +8,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<DateTime>(
-                name: "endTime",
+                name: "end_time",
                 table: "terms",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "startTime",
+                name: "start_time",
                 table: "terms",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
@@ -23,11 +23,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "endTime",
+                name: "end_time",
                 table: "terms");
 
             migrationBuilder.DropColumn(
-                name: "startTime",
+                name: "start_time",
                 table: "terms");
         }
     }
