@@ -31,6 +31,20 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
             return Ok(lecturerMapResult);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LecturerDTO>> Get([FromRoute] short id)
+        {
+            var lecturer = await UnitOfWork.LecturersRepository.GetByIdAsync(id);
+            if (lecturer == null)
+            {
+                return BadRequest("Requested lecturer doesn't exist.");
+            }
+
+            var lecturerMapResult = Mapper.Map<Lecturer, LecturerDTO>(lecturer);
+
+            return Ok(lecturerMapResult);
+        }
+
         [HttpGet("by_subject")]
         public async Task<ActionResult<List<LecturerDTO>>> GetBySemesterModuleSubject([FromQuery] short subjectId, short moduleId, short semesterId)
         {

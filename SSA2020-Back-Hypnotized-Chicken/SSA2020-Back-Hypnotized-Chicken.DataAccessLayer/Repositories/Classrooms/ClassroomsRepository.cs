@@ -30,5 +30,15 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Classroom
         {
             return await _dbContext.Classrooms.AnyAsync(c => c.Id == id);
         }
+
+        public async Task<Classroom> GetByIdAsync(short id)
+        {
+            return await _dbContext.Classrooms.FirstOrDefaultAsync(l => l.Id == id);
+        }
+
+        public Classroom GetById(short id)
+        {
+            return _dbContext.Classrooms.FirstOrDefault(l => l.Id == id);
+        }
     }
 }

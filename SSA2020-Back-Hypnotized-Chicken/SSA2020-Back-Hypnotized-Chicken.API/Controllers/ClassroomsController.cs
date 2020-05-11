@@ -30,5 +30,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
             return Ok(classroomMapResult);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ClassroomDTO>> Get([FromRoute] short id)
+        {
+            var classroom = await UnitOfWork.ClassroomsRepository.GetByIdAsync(id);
+            if (classroom == null)
+            {
+                return BadRequest("No classroom with the given id exists.");
+            }
+
+            var classroomMapResult = Mapper.Map<Classroom, ClassroomDTO>(classroom);
+
+            return Ok(classroomMapResult);
+        }
     }
 }

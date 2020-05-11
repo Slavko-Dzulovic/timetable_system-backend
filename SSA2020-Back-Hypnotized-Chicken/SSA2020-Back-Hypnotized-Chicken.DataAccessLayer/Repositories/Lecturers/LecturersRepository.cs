@@ -26,6 +26,16 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers
             return _dbContext.Lecturers.ToList();
         }
 
+        public async Task<Lecturer> GetByIdAsync(short id)
+        {
+            return await _dbContext.Lecturers.FirstOrDefaultAsync(l => l.Id == id);
+        }
+
+        public Lecturer GetById(short id)
+        {
+            return _dbContext.Lecturers.FirstOrDefault(l => l.Id == id);
+        }
+
         public async Task<List<Lecturer>> GetLecturersBySemesterModuleSubjectAsync(short subjectId, short moduleId, short semesterId)
         {
             var queryResultAsync = await _dbContext.Slots

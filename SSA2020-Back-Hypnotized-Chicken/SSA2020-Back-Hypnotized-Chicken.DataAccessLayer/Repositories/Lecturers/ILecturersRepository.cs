@@ -10,6 +10,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Lecturers
         List<Lecturer> GetLecturersBySemesterModuleSubject(short subjectId, short moduleId, short semesterId);
         Task<List<Lecturer>> GetLecturersAsync();
         List<Lecturer> GetLecturers();
-        
+        Task<Lecturer> GetByIdAsync(short id);
+        Lecturer GetById(short id);
     }
 }

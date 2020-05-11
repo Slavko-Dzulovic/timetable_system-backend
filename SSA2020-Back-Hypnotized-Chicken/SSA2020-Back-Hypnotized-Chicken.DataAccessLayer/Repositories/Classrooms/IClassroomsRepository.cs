@@ -9,5 +9,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Classroom
         List<Classroom> GetClassrooms();
         Task<List<Classroom>> GetClassroomsAsync();
         Task<bool> CheckIfClassroomExistsAsync(short id);
+        Task<Classroom> GetByIdAsync(short id);
+        Classroom GetById(short id);
     }
 }
