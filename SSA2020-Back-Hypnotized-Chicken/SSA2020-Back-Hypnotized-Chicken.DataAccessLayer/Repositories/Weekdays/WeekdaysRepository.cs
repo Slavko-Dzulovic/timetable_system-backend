@@ -30,5 +30,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Weekdays
 		{
 			return _dbContext.Weekdays.ToList();
 		}
+
+		public Weekday GetWeekdayById(short id)
+		{
+			return _dbContext.Weekdays.FirstOrDefault(w => w.Id == id);
+		}
 	}
 }

@@ -10,5 +10,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 		List<Subject> SubjectsBySemesterAndModule(short semesterId, short moduleId);
 		Task<bool> CheckIfSlotExistsAsync(long id);
 		long GetSlotIdByAllForeignKeys(short subjectId, short moduleId, short semesterId, short lecturerId);
+		Slot GetSlotById(long id);
 	}
 }

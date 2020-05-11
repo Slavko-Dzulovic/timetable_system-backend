@@ -201,5 +201,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return Ok(termMapResult);
 		}
+
+		[HttpGet("{id}")]
+		public TermDTO GetById(short id)
+		{
+			var term = UnitOfWork.TermsRepository.GetTermById(id);
+
+			var termMapResult = Mapper.Map<Term, TermDTO>(term);
+			return termMapResult;
+		}
 	}
 }
