@@ -9,19 +9,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.DropColumn(
                 name: "optional_subject_number",
                 table: "terms");
-
-            migrationBuilder.AddColumn<short>(
-                name: "optional_subject_number",
-                table: "slots",
-                nullable: false,
-                defaultValue: (short)0);
+            //
+            // migrationBuilder.AddColumn<short>(
+            //     name: "optional_subject_number",
+            //     table: "slots",
+            //     nullable: false,
+            //     defaultValue: (short)0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "optional_subject_number",
-                table: "slots");
+            // migrationBuilder.DropColumn(
+            //     name: "optional_subject_number",
+            //     table: "slots");
 
             migrationBuilder.AddColumn<short>(
                 name: "optional_subject_number",

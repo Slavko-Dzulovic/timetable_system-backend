@@ -55,7 +55,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                     module_id = table.Column<short>(nullable: false),
                     semester_id = table.Column<short>(nullable: false),
                     lecturer_id = table.Column<short>(nullable: false),
-                    is_optional = table.Column<bool>(nullable: false)
+                    is_optional = table.Column<bool>(nullable: false),
+                    optional_subject_number = table.Column<short>(nullable: true)
                 },
                 constraints: table =>
                 {
