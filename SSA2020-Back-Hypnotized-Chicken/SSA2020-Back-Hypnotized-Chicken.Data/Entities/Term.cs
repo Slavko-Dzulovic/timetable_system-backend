@@ -12,11 +12,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		public override short Id { get; set; }
 
 		[Required]
-		[Column("startTime", Order = 1)]
+		[Column("start_time", Order = 1)]
 		public DateTime StartTime { get; set; }
 
 		[Required]
-		[Column("endTime", Order = 2)]
+		[Column("end_time", Order = 2)]
 		public DateTime EndTime { get; set; }
 
 		[Column("group", Order = 3)]
@@ -25,38 +25,38 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		[Column("module", Order = 4)]
 		public string Module { get; set; }
 
-		[Column("numberOfLectures", Order = 5)]
+		[Column("number_of_lectures", Order = 5)]
 		public short NumberOfLectures { get; set; }
 
-		[Column("numberOfExercises", Order = 6)]
+		[Column("number_of_exercises", Order = 6)]
 		public short NumberOfExercises { get; set; }
 		
-		[Column("numberOfLabExercises", Order = 7)]
+		[Column("number_of_lab_exercises", Order = 7)]
 		public short NumberOfLabExercises { get; set; }
 		
 		[Required]
-		[Column("weekdayId", Order = 8)]
+		[Column("weekday_id", Order = 8)]
 		public short WeekdayId { get; set; }
 		
 		[ForeignKey("WeekdayId")]
 		public Weekday Weekday { get; set; }
 		
 		[Required]
-		[Column("classroomId", Order = 9)]
+		[Column("classroom_id", Order = 9)]
 		public short ClassroomId { get; set; }
 		
 		[ForeignKey("ClassroomId")]
 		public Classroom Classroom { get; set; }
 		
 		[Required]
-		[Column("scheduleId", Order = 10)]
+		[Column("schedule_id", Order = 10)]
 		public short ScheduleId { get; set; }
 		
 		[ForeignKey("ScheduleId")]
 		public Schedule Schedule { get; set; }
 		
 		[Required]
-		[Column("slotId", Order = 11)]
+		[Column("slot_id", Order = 11)]
 		public long SlotId { get; set; }
 		
 		[ForeignKey("SlotId")]
