@@ -11,5 +11,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Weekdays
         Task<bool> CheckIfWeekdayExistsAsync(short id);
         Task<List<Weekday>> GetAllWeekdaysAsync();
         List<Weekday> GetAllWeekdays();
+        Weekday GetWeekdayById(short id);
     }
 }

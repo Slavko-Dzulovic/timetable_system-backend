@@ -60,5 +60,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 
 			return slotId;
 		}
+
+		public Slot GetSlotById(long id)
+		{
+			return _dbContext.Slots.FirstOrDefault(s => s.Id == id);
+		}
 	}
 }

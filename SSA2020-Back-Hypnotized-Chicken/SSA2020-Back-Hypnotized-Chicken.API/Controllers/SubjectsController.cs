@@ -32,7 +32,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 		}
 		
 		[HttpGet]
-		public async Task<ActionResult<List<SlotBySemesterAndModuleDTO>>> Subjects([FromQuery] short semesterId, short moduleId)
+		public async Task<ActionResult<List<SubjectDTO>>> Subjects([FromQuery] short semesterId, short moduleId)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -56,9 +56,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return NoContent();
 			}
 
-			var slotMapResult = Mapper.Map<List<Subject>, List<SlotBySemesterAndModuleDTO>>(list);
+			var subjectMapResult = Mapper.Map<List<Subject>, List<SubjectDTO>>(list);
 
-			return Ok(slotMapResult);
+			return Ok(subjectMapResult);
 		}
 		[HttpGet("{id}")]
 		public SubjectDTO GetById(short id)

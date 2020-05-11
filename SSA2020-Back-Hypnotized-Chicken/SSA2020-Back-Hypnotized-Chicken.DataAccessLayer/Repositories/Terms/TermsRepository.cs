@@ -147,5 +147,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 
 			return queryResult;
 		}
+
+		public Term GetTermById(short id)
+		{
+			return _dbContext.Terms.FirstOrDefault(t => t.Id == id);
+		}
 	}
 }

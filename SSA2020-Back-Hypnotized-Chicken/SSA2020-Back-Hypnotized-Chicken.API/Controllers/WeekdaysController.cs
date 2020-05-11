@@ -29,5 +29,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return Ok(weekdayMapResult);
 		}
+
+		[HttpGet("{id}")]
+		public WeekdayDTO GetById(short id)
+		{
+			var weekday = UnitOfWork.WeekdaysRepository.GetWeekdayById(id);
+
+			var weekdayMapResult = Mapper.Map<Weekday, WeekdayDTO>(weekday);
+			return weekdayMapResult;
+		}
 	}
 }

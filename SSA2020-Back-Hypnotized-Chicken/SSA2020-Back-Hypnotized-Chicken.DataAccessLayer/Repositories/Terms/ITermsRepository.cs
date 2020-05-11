@@ -21,5 +21,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		List<Term> GetTermsBySchedule(short scheduleId);
 		Task<List<Term>> GetTermsByScheduleAndWeekdayAsync(short scheduleId, short weekdayId);
 		List<Term> GetTermsByScheduleAndWeekday(short scheduleId, short weekdayId);
+		Term GetTermById(short id);
 	}
 }

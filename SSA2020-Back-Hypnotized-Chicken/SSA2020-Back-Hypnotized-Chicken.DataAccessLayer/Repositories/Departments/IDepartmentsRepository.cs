@@ -9,7 +9,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Departmen
 		Task<bool> CheckIfDepartmentExistsAsync(short id);
 		bool CheckIfDepartmentExists(short id);
         List<Department> GetDepartments();
-        Department GetDepartmentById(int id);
+        Department GetDepartmentById(short id);
         Task<List<Department>> GetDepartmentsAsync();
     }
 }
