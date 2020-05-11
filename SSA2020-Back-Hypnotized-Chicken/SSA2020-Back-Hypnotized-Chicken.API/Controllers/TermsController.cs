@@ -171,5 +171,35 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return termsMapResult;
 		}
+
+		[HttpGet("by_schedule_and_weekday")]
+		public async Task<ActionResult<List<TermDTO>>> Terms([FromQuery] short scheduleId, short weekdayId)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest("Not all of the needed information is supplied.");
+			}
+
+			var validateScheduleId = await UnitOfWork.SchedulesRepository.CheckIfScheduleExistsAsync(scheduleId);
+			var validateWeekdayId = await UnitOfWork.WeekdaysRepository.CheckIfWeekdayExistsAsync(weekdayId);
+
+			if (!validateScheduleId ||
+				!validateWeekdayId)
+			{
+				return BadRequest("No schedule or weekday by the given id exist.");
+			}
+
+			var list = await UnitOfWork.TermsRepository.GetTermsByScheduleAndWeekdayAsync(scheduleId, weekdayId);
+
+			if (list == null ||
+				!list.Any())
+			{
+				return NoContent();
+			}
+
+			var termMapResult = Mapper.Map<List<Term>, List<TermDTO>>(list);
+
+			return Ok(termMapResult);
+		}
 	}
 }

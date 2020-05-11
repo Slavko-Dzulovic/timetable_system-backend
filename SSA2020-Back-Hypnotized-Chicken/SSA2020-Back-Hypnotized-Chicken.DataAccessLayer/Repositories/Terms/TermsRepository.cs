@@ -121,5 +121,31 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		{
 			return _dbContext.Terms.Where(t => t.ScheduleId == scheduleId).ToList();
 		}
+
+		public Task<List<Term>> GetTermsByScheduleAndWeekdayAsync(short scheduleId, short weekdayId)
+		{
+			var queryResultAsync = _dbContext.Terms
+				.Include(sch => sch.Schedule)
+				.Include(wd => wd.Weekday)
+				.Where(t => t.ScheduleId == scheduleId && t.WeekdayId == weekdayId)
+				.Select(term => term)
+				.Distinct()
+				.ToListAsync();
+
+			return queryResultAsync;
+		}
+
+		public List<Term> GetTermsByScheduleAndWeekday(short scheduleId, short weekdayId)
+		{
+			var queryResult = _dbContext.Terms
+				.Include(sch => sch.Schedule)
+				.Include(wd => wd.Weekday)
+				.Where(t => t.ScheduleId == scheduleId && t.WeekdayId == weekdayId)
+				.Select(term => term)
+				.Distinct()
+				.ToList();
+
+			return queryResult;
+		}
 	}
 }
