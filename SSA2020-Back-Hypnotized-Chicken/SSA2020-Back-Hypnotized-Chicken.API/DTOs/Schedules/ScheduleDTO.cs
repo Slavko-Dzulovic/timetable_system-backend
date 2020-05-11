@@ -9,5 +9,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 
 		[JsonProperty("name")]
 		public string Name { get; set; }
+		
+		[JsonProperty("semester_id")]
+		public short SemesterId { get; set; }
+
+		[JsonProperty("department_id")]
+		public short DepartmentId { get; set; }
+		
+		[JsonProperty("is_active")]
+		public bool IsActive { get; set; }
 	}
 }
