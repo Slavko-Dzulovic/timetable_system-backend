@@ -97,8 +97,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No term by the given id exists.");
 			}
 
-			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.StartTime, data.EndTime, data.Group, data.Module, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
-				data.WeekdayId, data.ClassroomId);
+			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.StartTime, data.EndTime, data.Group, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
+				data.WeekdayId, data.ClassroomId, data.SlotId);
 
 			if (editTerm == null)
 			{

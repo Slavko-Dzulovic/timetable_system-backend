@@ -46,7 +46,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 				options.AddPolicy(name: MyAllowSpecificOrigins,
 					builder =>
 					{
-						builder.WithOrigins("http://localhost:4200");
+						builder.AllowAnyOrigin();
+						builder.AllowAnyHeader();
 					});
 			});
 		}

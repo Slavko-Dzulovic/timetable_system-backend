@@ -22,7 +22,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Slots
 					options => options.MapFrom(source => source.SemesterId))
 				.ForMember(
 					destination => destination.LecturerId,
-					options => options.MapFrom(source => source.LecturerId));
+					options => options.MapFrom(source => source.LecturerId))
+				.ForMember(
+					destination => destination.IsOptional,
+					options => options.MapFrom(source => source.IsOptional));
 
 		}
 	}

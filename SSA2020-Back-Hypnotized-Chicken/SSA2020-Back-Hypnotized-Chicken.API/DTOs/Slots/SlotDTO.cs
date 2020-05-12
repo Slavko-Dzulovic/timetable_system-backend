@@ -17,6 +17,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Slots
 		public short SemesterId { get; set; }
 
 		[JsonProperty("lecturer_id")]
-		public short LecturerId { get; set; }
+		public short LecturerId { get; set; } 
+
+		[JsonProperty("is_optional")]
+		public bool IsOptional { get; set; }
+
+		[JsonProperty("optional_subject_number")]
+		public short OptionalSubjectNumber { get; set; }
 	}
 }
