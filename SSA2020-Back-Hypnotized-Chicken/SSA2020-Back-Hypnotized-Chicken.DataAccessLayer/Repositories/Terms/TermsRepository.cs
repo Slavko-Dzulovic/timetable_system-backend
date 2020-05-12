@@ -20,7 +20,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 
 		public async Task<Term> AddNewTermAsync(Term term)
 		{
-			var checkIfAlreadyAddedQuery = await _dbContext.Terms.AnyAsync(t => t.Id == term.Id);
+			var checkIfAlreadyAddedQuery = await _dbContext.Terms
+				.Include(t => t.Slot)
+				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
+				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
+				.AnyAsync(t => t.Id == term.Id);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -31,7 +38,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 
 		public Term AddNewTerm(Term term)
 		{
-			var checkIfAlreadyAddedQuery = _dbContext.Terms.Any(t => t.Id == term.Id);
+			var checkIfAlreadyAddedQuery = _dbContext.Terms
+				.Include(t => t.Slot)
+				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
+				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
+				.Any(t => t.Id == term.Id);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -44,8 +58,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 			short noExercises, short noLabExercises, short weekdayId, short classroomId, long slotId)
 		{
 			var term = await _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.FirstOrDefaultAsync(t => t.Id == id);
 			if (term == null)
 			{
@@ -69,8 +87,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 			short noExercises, short noLabExercises, short weekdayId, short classroomId, long slotId)
 		{
 			var term = _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.FirstOrDefault(t => t.Id == id);
 			if (term == null)
 			{
@@ -112,42 +134,60 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		public async Task<List<Term>> GetTermsByWeekdayAsync(short weekdayId)
 		{
 			return await _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.WeekdayId == weekdayId).ToListAsync();
 		}
 
 		public List<Term> GetTermsByWeekday(short weekdayId)
 		{
 			return _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.WeekdayId == weekdayId).ToList();
 		}
 
 		public async Task<List<Term>> GetTermsByScheduleAsync(short scheduleId)
 		{
 			return await _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.ScheduleId == scheduleId).ToListAsync();
 		}
 
 		public List<Term> GetTermsBySchedule(short scheduleId)
 		{
 			return _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.ScheduleId == scheduleId).ToList();
 		}
 
 		public Task<List<Term>> GetTermsByScheduleAndWeekdayAsync(short scheduleId, short weekdayId)
 		{
 			var queryResultAsync = _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
-				.Include(sch => sch.Schedule)
-				.Include(wd => wd.Weekday)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.ScheduleId == scheduleId && t.WeekdayId == weekdayId)
 				.Select(term => term)
 				.Distinct()
@@ -159,10 +199,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		public List<Term> GetTermsByScheduleAndWeekday(short scheduleId, short weekdayId)
 		{
 			var queryResult = _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
-				.Include(sch => sch.Schedule)
-				.Include(wd => wd.Weekday)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.ScheduleId == scheduleId && t.WeekdayId == weekdayId)
 				.Select(term => term)
 				.Distinct()
@@ -174,10 +216,31 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		public Term GetTermById(short id)
 		{
 			return _dbContext.Terms
+				.Include(t => t.Slot)
 				.Include(t => t.Classroom)
+				.Include(t => t.Weekday)
 				.Include(t => t.Slot.Module)
+				.Include(t => t.Slot.Subject)
+				.Include(t => t.Slot.Lecturer)
 				.Where(t => t.Id == id)
 				.Single();
+		}
+		public bool TermOverlapsWithOthers(DateTime start1, DateTime end1, short weekdayId, short classroomId, short scheduleId)
+		{
+			List<Term> allTerms = _dbContext.Terms.ToList(); 
+			foreach (Term term in allTerms) {
+				if (term.ScheduleId == scheduleId && term.WeekdayId == weekdayId && term.ClassroomId == classroomId)
+				{
+					DateTime start2 = term.StartTime;
+					DateTime end2 = term.EndTime;
+
+					if (start1 < end2 && end1 > start2)
+					{
+						return true;
+					}
+				}	
+			}
+			return false;
 		}
 	}
 }

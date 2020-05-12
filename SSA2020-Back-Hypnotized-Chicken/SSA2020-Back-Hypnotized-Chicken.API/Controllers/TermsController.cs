@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -52,12 +53,26 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			{
 				return BadRequest("No schedule by the given id exists.");
 			}
+			
+			Regex regex = new Regex("^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$");
+
+			var matchStartTime = regex.Match(term.StartTime);
+			var matchEndTime = regex.Match(term.EndTime);
+
+			var startTimeDT = new DateTime(2017, 1, 1, int.Parse(matchStartTime.Groups[1].Value), int.Parse(matchStartTime.Groups[2].Value), 0);
+			var endTimeDT = new DateTime(2017, 1, 1, int.Parse(matchEndTime.Groups[1].Value), int.Parse(matchEndTime.Groups[2].Value), 0);
+
+			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(startTimeDT, endTimeDT, term.WeekdayId, term.ClassroomId, term.ScheduleId))
+			{
+				return BadRequest("The created term overlaps with other terms. Please pick another start and end time.");
+			}
 
 			var savedTerm = await UnitOfWork.TermsRepository.AddNewTermAsync(
+
 				new Term
 				{
-					StartTime = term.StartTime,
-					EndTime = term.EndTime,
+					StartTime = startTimeDT,
+					EndTime = endTimeDT,
 					Group = term.Group,
 					Module = module,
 					NumberOfLectures = term.NumberOfLectures,
@@ -97,8 +112,22 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No term by the given id exists.");
 			}
 
-			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, data.StartTime, data.EndTime, data.Group, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
+			Regex regex = new Regex("^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$");
+
+			var matchStartTime = regex.Match(data.StartTime);
+			var matchEndTime = regex.Match(data.EndTime);
+
+			var startTimeDT = new DateTime(2017, 1, 1, int.Parse(matchStartTime.Groups[1].Value), int.Parse(matchStartTime.Groups[2].Value), 0);
+			var endTimeDT = new DateTime(2017, 1, 1, int.Parse(matchEndTime.Groups[1].Value), int.Parse(matchEndTime.Groups[2].Value), 0);
+
+			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(startTimeDT, endTimeDT, data.WeekdayId, data.ClassroomId, data.ScheduleId))
+			{
+				return BadRequest("The created term overlaps with others. Please pick another start and end time.");
+			}
+
+			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, startTimeDT, endTimeDT, data.Group, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
 				data.WeekdayId, data.ClassroomId, data.SlotId);
+
 
 			if (editTerm == null)
 			{
