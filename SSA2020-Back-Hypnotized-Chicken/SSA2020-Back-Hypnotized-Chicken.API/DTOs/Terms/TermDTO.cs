@@ -8,11 +8,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 		[JsonProperty("id")]
 		public short Id { get; set; }
 
-		[JsonProperty("startTime")]
-		public DateTime StartTime { get; set; }
+		[JsonProperty("start_time")]
+		public string StartTime { get; set; }
 
-		[JsonProperty("endTime")]
-		public DateTime EndTime { get; set; }
+		[JsonProperty("end_time")]
+		public string EndTime { get; set; }
 
 		[JsonProperty("group")]
 		public short Group { get; set; }
@@ -34,6 +34,18 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 
 		[JsonProperty("optional_subject_number")]
 		public short OptionalSubjectNumber { get; set; }
+
+		[JsonProperty("subject_id")]
+		public short SubjectId { get; set; }
+
+		[JsonProperty("module_id")]
+		public short ModuleId { get; set; }
+
+		[JsonProperty("semester_id")]
+		public short SemesterId { get; set; }
+
+		[JsonProperty("lecturer_id")]
+		public short LecturerId { get; set; }
 
 		[JsonProperty("slot_id")]
 		public long SlotId { get; set; }

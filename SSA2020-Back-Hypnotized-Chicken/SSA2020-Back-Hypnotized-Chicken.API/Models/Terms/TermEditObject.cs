@@ -11,11 +11,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		public short Id { get; set; }
 
 		[Required]
-		[JsonProperty("startTime")]
+		[JsonProperty("start_time")]
 		public DateTime StartTime { get; set; }
 
 		[Required]
-		[JsonProperty("endTime")]
+		[JsonProperty("end_time")]
 		public DateTime EndTime { get; set; }
 
 		[JsonProperty("group")]
