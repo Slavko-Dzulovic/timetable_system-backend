@@ -20,9 +20,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 		[JsonProperty("module")]
 		public string Module { get; set; }
 
-		[JsonProperty("optional_subject_number")]
-		public short OptionalSubjectNumber { get; set; }
-
 		[JsonProperty("number_of_lectures")]
 		public short NumberOfLectures { get; set; }
 
@@ -34,5 +31,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 
 		[JsonProperty("classroom")]
 		public string Classroom { get; set; }
+
+		[JsonProperty("optional_subject_number")]
+		public short OptionalSubjectNumber { get; set; }
+
+		[JsonProperty("slot_id")]
+		public long SlotId { get; set; }
 	}
 }

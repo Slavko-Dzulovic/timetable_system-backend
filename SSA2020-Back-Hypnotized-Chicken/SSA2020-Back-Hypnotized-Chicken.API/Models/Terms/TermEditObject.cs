@@ -21,9 +21,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		[JsonProperty("group")]
 		public short Group { get; set; }
 
-		[JsonProperty("module")]
-		public string Module { get; set; }
-
 		[JsonProperty("number_of_lectures")]
 		public short NumberOfLectures { get; set; }
 
@@ -36,8 +33,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		[Required]
 		[JsonProperty("weekday_id")]
 		public short WeekdayId { get; set; }
+
 		[Required]
 		[JsonProperty("classroom_id")]
 		public short ClassroomId { get; set; }
+
+		[Required]
+		[JsonProperty("slot_id")]
+		public long SlotId { get; set; }
 	}
 }

@@ -9,10 +9,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 	{
 		Task<Term> AddNewTermAsync(Term term);
 		Term AddNewTerm(Term term);
-		Task<Term> EditTermAsync(short id, DateTime startTime, DateTime endTime, short group, string module, short noLectures, 
-			short noExercises, short noLabExercises, short weekdayId, short classroomId);
-		Term EditTerm(short id, DateTime startTime, DateTime endTime, short group, string module, short noLectures, 
-			short noExercises, short noLabExercises, short weekdayId, short classroomId);
+		Task<Term> EditTermAsync(short id, DateTime startTime, DateTime endTime, short group, short noLectures, 
+			short noExercises, short noLabExercises, short weekdayId, short classroomId, long slotId);
+		Term EditTerm(short id, DateTime startTime, DateTime endTime, short group, short noLectures, 
+			short noExercises, short noLabExercises, short weekdayId, short classroomId, long slotId);
 		Task<bool> CheckIfTermExistsAsync(short id);
 		Task<short> DeleteTermAsync(short id);
 		Task<List<Term>> GetTermsByWeekdayAsync(short weekdayId);
