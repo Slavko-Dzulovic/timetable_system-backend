@@ -30,7 +30,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			}
 
 			var slotId = UnitOfWork.SlotsRepository.GetSlotIdByAllForeignKeys(term.SubjectId, term.ModuleId, term.SemesterId, term.LecturerId);
-			var module = UnitOfWork.ModulesRepository.GetModuleById(term.ModuleId).Name;
 
 			var validateWeekdayId = await UnitOfWork.WeekdaysRepository.CheckIfWeekdayExistsAsync(term.WeekdayId);
 			var validateClassroomId = await UnitOfWork.ClassroomsRepository.CheckIfClassroomExistsAsync(term.ClassroomId);
@@ -74,7 +73,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 					StartTime = startTimeDT,
 					EndTime = endTimeDT,
 					Group = term.Group,
-					Module = module,
 					NumberOfLectures = term.NumberOfLectures,
 					NumberOfExercises = term.NumberOfExercises,
 					NumberOfLabExercises = term.NumberOfLabExercises,
@@ -112,6 +110,30 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No term by the given id exists.");
 			}
 
+			var slotId = UnitOfWork.SlotsRepository.GetSlotIdByAllForeignKeys(data.SubjectId, data.ModuleId, data.SemesterId, data.LecturerId);
+
+			var validateWeekdayId = await UnitOfWork.WeekdaysRepository.CheckIfWeekdayExistsAsync(data.WeekdayId);
+			var validateClassroomId = await UnitOfWork.ClassroomsRepository.CheckIfClassroomExistsAsync(data.ClassroomId);
+			var validateSlotId = await UnitOfWork.SlotsRepository.CheckIfSlotExistsAsync(slotId);
+			var validateScheduleId = await UnitOfWork.SchedulesRepository.CheckIfScheduleExistsAsync(data.ScheduleId);
+
+			if (!validateWeekdayId)
+			{
+				return BadRequest("No weekday by the given id exists.");
+			}
+			if (!validateClassroomId)
+			{
+				return BadRequest("No classroom by the given id exists.");
+			}
+			if (!validateSlotId)
+			{
+				return BadRequest("No slot by the given id exists.");
+			}
+			if (!validateScheduleId)
+			{
+				return BadRequest("No schedule by the given id exists.");
+			}
+
 			Regex regex = new Regex("^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$");
 
 			var matchStartTime = regex.Match(data.StartTime);
@@ -126,7 +148,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			}
 
 			var editTerm = await UnitOfWork.TermsRepository.EditTermAsync(data.Id, startTimeDT, endTimeDT, data.Group, data.NumberOfLectures, data.NumberOfExercises, data.NumberOfLabExercises,
-				data.WeekdayId, data.ClassroomId, data.SlotId);
+				data.WeekdayId, data.ClassroomId, slotId);
 
 
 			if (editTerm == null)
