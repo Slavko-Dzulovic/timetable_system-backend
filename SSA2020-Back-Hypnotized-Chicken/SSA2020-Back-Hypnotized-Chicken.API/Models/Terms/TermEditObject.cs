@@ -12,11 +12,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 
 		[Required]
 		[JsonProperty("start_time")]
-		public DateTime StartTime { get; set; }
+		public string StartTime { get; set; }
 
 		[Required]
 		[JsonProperty("end_time")]
-		public DateTime EndTime { get; set; }
+		public string EndTime { get; set; }
 
 		[JsonProperty("group")]
 		public short Group { get; set; }
@@ -37,6 +37,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		[Required]
 		[JsonProperty("classroom_id")]
 		public short ClassroomId { get; set; }
+
+		[JsonProperty("schedule_id")]
+		public short ScheduleId { get; set; }
 
 		[Required]
 		[JsonProperty("slot_id")]
