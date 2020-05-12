@@ -42,7 +42,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		public short ScheduleId { get; set; }
 
 		[Required]
-		[JsonProperty("slot_id")]
-		public long SlotId { get; set; }
+		[JsonProperty("subject_id")]
+		public short SubjectId { get; set; }
+
+		[Required]
+		[JsonProperty("module_id")]
+		public short ModuleId { get; set; }
+
+		[Required]
+		[JsonProperty("semester_id")]
+		public short SemesterId { get; set; }
+
+		[Required]
+		[JsonProperty("lecturer_id")]
+		public short LecturerId { get; set; }
 	}
 }
