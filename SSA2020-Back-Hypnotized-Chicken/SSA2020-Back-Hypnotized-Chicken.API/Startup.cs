@@ -48,6 +48,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 					{
 						builder.AllowAnyOrigin();
 						builder.AllowAnyHeader();
+						builder.AllowAnyMethod();
 					});
 			});
 		}
@@ -84,6 +85,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+		}
+
+		private static void UpdateDatabase(IApplicationBuilder app)
+		{
+			using (var serviceScope = app.ApplicationServices
+				.GetRequiredService<IServiceScopeFactory>()
+				.CreateScope())
+			{
+				using (var context = serviceScope.ServiceProvider.GetService<TimetableDbContext>())
+				{
+					context.Database.Migrate();
+				}
+			}
 		}
 	}
 }
