@@ -131,7 +131,17 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			                                                s.IsActive);
 		}
 
-		public async Task<Schedule> EditScheduleAsync(short id, string name)
+		public async Task<List<Schedule>> GetAllSchedulesAsync()
+		{
+			return await _dbContext.Schedules.ToListAsync();
+		}
+
+		public List<Schedule> GetAllSchedules()
+		{
+			return _dbContext.Schedules.ToList();
+		}
+
+		public async Task<Schedule> EditScheduleAsync(short id, string name, bool isActive)
 		{
 			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id);
 			if (schedule == null)
@@ -140,11 +150,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			}
 
 			schedule.Name = name;
-
+			schedule.IsActive = isActive;
+			
 			return await _dbContext.SaveChangesAsync() > 0 ? schedule : null;
 		}
 
-		public Schedule EditSchedule(short id, string name)
+		public Schedule EditSchedule(short id, string name, bool isActive)
 		{
 			var schedule = _dbContext.Schedules.FirstOrDefault(sch => sch.Id == id);
 			if (schedule == null)
@@ -153,6 +164,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			}
 
 			schedule.Name = name;
+			schedule.IsActive = isActive;
 
 			return _dbContext.SaveChanges() > 0 ? schedule : null;
 		}

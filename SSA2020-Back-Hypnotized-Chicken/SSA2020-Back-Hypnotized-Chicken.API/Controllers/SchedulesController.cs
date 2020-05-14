@@ -96,7 +96,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("No schedule by the given id exists.");
 			}
 
-			var editSchedule = await UnitOfWork.SchedulesRepository.EditScheduleAsync(data.Id, data.Name);
+			var editSchedule = await UnitOfWork.SchedulesRepository.EditScheduleAsync(data.Id, data.Name, data.IsActive);
 
 			if (editSchedule == null)
 			{
@@ -156,6 +156,21 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			}
 
 			var scheduleMapResult = Mapper.Map<Schedule, ScheduleDTO>(schedule);
+
+			return Ok(scheduleMapResult);
+		}
+
+		[HttpGet("all")]
+		public async Task<ActionResult<List<ScheduleDTO>>> All()
+		{
+			var schedules = await UnitOfWork.SchedulesRepository.GetAllSchedulesAsync();
+			if (schedules == null ||
+			    !schedules.Any())
+			{
+				return NoContent();
+			}
+
+			var scheduleMapResult = Mapper.Map<List<Schedule>, List<ScheduleDTO>>(schedules);
 
 			return Ok(scheduleMapResult);
 		}

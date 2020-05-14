@@ -12,5 +12,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		[Required]
 		[JsonProperty("name")]
 		public string Name { get; set; }
+		
+		[Required]
+		[JsonProperty("is_active")]
+		public bool IsActive { get; set; }
 	}
 }

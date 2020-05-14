@@ -8,8 +8,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 	{
 		Task<bool> CheckIfScheduleExistsAsync(short id);
 		bool CheckIfScheduleExists(short id);
-		Task<Schedule> EditScheduleAsync(short id, string name);
-		Schedule EditSchedule(short id, string name);
+		Task<Schedule> EditScheduleAsync(short id, string name, bool isActive);
+		Schedule EditSchedule(short id, string name, bool isActive);
 		Task<Schedule> AddNewScheduleAsync(Schedule schedule);
 		Schedule AddNewSchedule(Schedule schedule);
 		Task<bool> SetInactiveAsync(short id);
@@ -22,5 +22,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 		List<Schedule> GetAllActiveSchedules();
 		Task<Schedule> GetActiveScheduleByIdAsync(short id);
 		Schedule GetActiveScheduleById(short id);
+		Task<List<Schedule>> GetAllSchedulesAsync();
+		List<Schedule> GetAllSchedules();
 	}
 }
