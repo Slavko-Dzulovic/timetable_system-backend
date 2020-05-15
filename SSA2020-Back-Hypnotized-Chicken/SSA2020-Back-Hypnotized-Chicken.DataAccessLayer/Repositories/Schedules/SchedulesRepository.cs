@@ -27,7 +27,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public async Task<Schedule> AddNewScheduleAsync(Schedule schedule)
 		{
-			var checkIfAlreadyAddedQuery = await _dbContext.Schedules.AnyAsync(s => s.Id == schedule.Id);
+			var checkIfAlreadyAddedQuery = await _dbContext.Schedules.Include(s => s.Semester)
+				.AnyAsync(s => s.Id == schedule.Id);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -40,7 +41,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public Schedule AddNewSchedule(Schedule schedule)
 		{
-			var checkIfAlreadyAddedQuery = _dbContext.Schedules.Any(s => s.Id == schedule.Id);
+			var checkIfAlreadyAddedQuery = _dbContext.Schedules.Include(s => s.Semester).Any(s => s.Id == schedule.Id);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -53,8 +54,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public async Task<bool> SetInactiveAsync(short id)
 		{
-			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id &&
-			                                                                     sch.IsActive);
+			var schedule = await _dbContext.Schedules.Include(s => s.Semester).FirstOrDefaultAsync(sch => sch.Id == id &&
+			                                                                                              sch.IsActive);
 			if (schedule == null)
 			{
 				return false;
@@ -68,8 +69,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public bool SetInactive(short id)
 		{
-			var schedule = _dbContext.Schedules.FirstOrDefault(sch => sch.Id == id &&
-			                                                          sch.IsActive);
+			var schedule = _dbContext.Schedules.Include(s => s.Semester).FirstOrDefault(sch => sch.Id == id &&
+			                                                                                   sch.IsActive);
 			if (schedule == null)
 			{
 				return false;
@@ -83,67 +84,65 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public async Task<List<Schedule>> GetActiveSchedulesBySemesterAsync(short semesterId)
 		{
-			var query = await _dbContext.Schedules.Where(s => s.SemesterId == semesterId && 
-			                                                  s.IsActive).ToListAsync();
+			var query = await _dbContext.Schedules.Include(s => s.Semester).Where(s => s.SemesterId == semesterId && 
+			                                                                           s.IsActive).ToListAsync();
 			return query;
 		}
 
 		public List<Schedule> GetActiveSchedulesBySemester(short semesterId)
 		{
-			var query = _dbContext.Schedules.Where(s => s.SemesterId == semesterId && 
-			                                            s.IsActive).ToList();
+			var query = _dbContext.Schedules.Include(s => s.Semester).Where(s => s.SemesterId == semesterId && 
+			                                                                     s.IsActive).ToList();
 			return query;
 		}
 
 		public async Task<List<Schedule>> GetActiveSchedulesByDepartmentAsync(short departmentId)
 		{
-			var query = await _dbContext.Schedules.Where(s => s.DepartmentId == departmentId && 
-			                                                  s.IsActive).ToListAsync();
+			var query = await _dbContext.Schedules.Include(s => s.Semester).Where(s => s.DepartmentId == departmentId && 
+			                                                                           s.IsActive).ToListAsync();
 			return query;
 		}
 
 		public List<Schedule> GetActiveSchedulesByDepartment(short departmentId)
 		{
-			var query = _dbContext.Schedules.Where(s => s.DepartmentId == departmentId && 
-			                                            s.IsActive).ToList();
+			var query = _dbContext.Schedules.Include(s => s.Semester).Where(s => s.DepartmentId == departmentId && 
+			                                                                     s.IsActive).ToList();
 			return query;
 		}
 
 		public async Task<List<Schedule>> GetAllActiveSchedulesAsync()
 		{
-			return await _dbContext.Schedules.Where(s => s.IsActive).ToListAsync();
+			return await _dbContext.Schedules.Include(s => s.Semester).Where(s => s.IsActive).ToListAsync();
 		}
 
 		public List<Schedule> GetAllActiveSchedules()
 		{
-			return _dbContext.Schedules.Where(s => s.IsActive).ToList();
+			return _dbContext.Schedules.Include(s => s.Semester).Where(s => s.IsActive).ToList();
 		}
 
 		public async Task<Schedule> GetActiveScheduleByIdAsync(short id)
 		{
-			return await _dbContext.Schedules.FirstOrDefaultAsync(s => s.Id == id &&
-			                                                           s.IsActive);
+			return await _dbContext.Schedules.Include(s => s.Semester).FirstOrDefaultAsync(s => s.Id == id && s.IsActive);
 		}
 
 		public Schedule GetActiveScheduleById(short id)
 		{
-			return _dbContext.Schedules.FirstOrDefault(s => s.Id == id &&
-			                                                s.IsActive);
+			return _dbContext.Schedules.Include(s => s.Semester).FirstOrDefault(s => s.Id == id && s.IsActive);
 		}
 
 		public async Task<List<Schedule>> GetAllSchedulesAsync()
 		{
-			return await _dbContext.Schedules.ToListAsync();
+			return await _dbContext.Schedules.Include(s => s.Semester).ToListAsync();
 		}
 
 		public List<Schedule> GetAllSchedules()
 		{
-			return _dbContext.Schedules.ToList();
+			return _dbContext.Schedules.Include(s => s.Semester).ToList();
 		}
 
 		public async Task<Schedule> EditScheduleAsync(short id, string name, bool isActive)
 		{
-			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(sch => sch.Id == id);
+			var schedule = await _dbContext.Schedules.Include(s => s.Semester).FirstOrDefaultAsync(sch => sch.Id == id);
 			if (schedule == null)
 			{
 				return null;
@@ -157,7 +156,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public Schedule EditSchedule(short id, string name, bool isActive)
 		{
-			var schedule = _dbContext.Schedules.FirstOrDefault(sch => sch.Id == id);
+			var schedule = _dbContext.Schedules.Include(s => s.Semester).FirstOrDefault(sch => sch.Id == id);
 			if (schedule == null)
 			{
 				return null;
