@@ -1,8 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace SSA2020_Back_Hypnotized_Chicken.API.Models
+namespace SSA2020_Back_Hypnotized_Chicken.API.Models.Terms
 {
 	public class TermEditObject
 	{

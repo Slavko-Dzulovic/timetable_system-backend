@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms;
 using SSA2020_Back_Hypnotized_Chicken.API.Models;
+using SSA2020_Back_Hypnotized_Chicken.API.Models.Terms;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork;
 
@@ -61,7 +62,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var startTimeDT = new DateTime(2017, 1, 1, int.Parse(matchStartTime.Groups[1].Value), int.Parse(matchStartTime.Groups[2].Value), 0);
 			var endTimeDT = new DateTime(2017, 1, 1, int.Parse(matchEndTime.Groups[1].Value), int.Parse(matchEndTime.Groups[2].Value), 0);
 
-			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(startTimeDT, endTimeDT, term.WeekdayId, term.ClassroomId, term.ScheduleId))
+			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(null, startTimeDT, endTimeDT, term.WeekdayId, term.ClassroomId, term.ScheduleId))
 			{
 				return BadRequest("The created term overlaps with other terms. Please pick another start and end time.");
 			}
@@ -142,7 +143,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var startTimeDT = new DateTime(2017, 1, 1, int.Parse(matchStartTime.Groups[1].Value), int.Parse(matchStartTime.Groups[2].Value), 0);
 			var endTimeDT = new DateTime(2017, 1, 1, int.Parse(matchEndTime.Groups[1].Value), int.Parse(matchEndTime.Groups[2].Value), 0);
 
-			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(startTimeDT, endTimeDT, data.WeekdayId, data.ClassroomId, data.ScheduleId))
+			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(data.Id, startTimeDT, endTimeDT, data.WeekdayId, data.ClassroomId, data.ScheduleId))
 			{
 				return BadRequest("The created term overlaps with others. Please pick another start and end time.");
 			}

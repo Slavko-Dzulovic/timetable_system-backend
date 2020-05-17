@@ -127,8 +127,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 
 			_dbContext.Terms.Remove(term);
 			await _dbContext.SaveChangesAsync();
+			
 			return id;
-
 		}
 
 		public async Task<List<Term>> GetTermsByWeekdayAsync(short weekdayId)
@@ -222,14 +222,23 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 				.Include(t => t.Slot.Module)
 				.Include(t => t.Slot.Subject)
 				.Include(t => t.Slot.Lecturer)
-				.Where(t => t.Id == id)
-				.Single();
+				.SingleOrDefault(t => t.Id == id);
 		}
-		public bool TermOverlapsWithOthers(DateTime start1, DateTime end1, short weekdayId, short classroomId, short scheduleId)
+		
+		public bool TermOverlapsWithOthers(short? termId, DateTime start1, DateTime end1, short weekdayId, short classroomId, short scheduleId)
 		{
-			List<Term> allTerms = _dbContext.Terms.ToList(); 
-			foreach (Term term in allTerms) {
-				if (term.ScheduleId == scheduleId && term.WeekdayId == weekdayId && term.ClassroomId == classroomId)
+			List<Term> terms = _dbContext.Terms
+				.Include(t => t.Schedule)
+				.Include(t => t.Weekday)
+				.Include(t => t.Classroom)
+				.Where(t => t.Schedule.IsActive &&
+				            t.ClassroomId == classroomId &&
+				            t.WeekdayId == weekdayId)
+				.ToList();
+			
+			foreach (Term term in terms)
+			{
+				if (termId == null)
 				{
 					DateTime start2 = term.StartTime;
 					DateTime end2 = term.EndTime;
@@ -238,7 +247,17 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 					{
 						return true;
 					}
-				}	
+				}
+				else
+				{
+					DateTime start2 = term.StartTime;
+					DateTime end2 = term.EndTime;
+
+					if (term.Id != termId && start1 < end2 && end1 > start2)
+					{
+						return true;
+					}
+				}
 			}
 			return false;
 		}

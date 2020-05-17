@@ -27,8 +27,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public async Task<Schedule> AddNewScheduleAsync(Schedule schedule)
 		{
-			var checkIfAlreadyAddedQuery = await _dbContext.Schedules.Include(s => s.Semester)
-				.AnyAsync(s => s.Id == schedule.Id);
+			var checkIfAlreadyAddedQuery = await _dbContext.Schedules
+				.Include(s => s.Semester)
+				.AnyAsync(s => s.Id == schedule.Id &&
+				               s.IsActive);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -41,7 +43,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 
 		public Schedule AddNewSchedule(Schedule schedule)
 		{
-			var checkIfAlreadyAddedQuery = _dbContext.Schedules.Include(s => s.Semester).Any(s => s.Id == schedule.Id);
+			var checkIfAlreadyAddedQuery = _dbContext.Schedules
+				.Include(s => s.Semester)
+				.Any(s => s.Id == schedule.Id &&
+				          s.IsActive);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;

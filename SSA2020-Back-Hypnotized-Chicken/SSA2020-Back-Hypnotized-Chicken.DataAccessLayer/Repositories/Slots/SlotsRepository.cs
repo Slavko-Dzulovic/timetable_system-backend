@@ -56,7 +56,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 				.Include(lec => lec.Lecturer)
 				.Where(s => s.SubjectId == subjectId && s.ModuleId == moduleId && s.SemesterId == semesterId && s.LecturerId == lecturerId)
 				.Select(slot => slot.Id)
-				.Single();
+				.SingleOrDefault();
 
 			return slotId;
 		}
