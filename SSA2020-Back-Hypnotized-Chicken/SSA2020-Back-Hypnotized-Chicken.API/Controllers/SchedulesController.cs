@@ -80,6 +80,26 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 
 			return Ok();
 		}
+		
+		[HttpDelete("delete/{id}")]
+		public async Task<ActionResult<ScheduleDTO>> HardDelete([FromRoute] short id)
+		{
+			var validateScheduleId = await UnitOfWork.SchedulesRepository.CheckIfScheduleExistsAsync(id);
+			if (!validateScheduleId)
+			{
+				return BadRequest("No schedule by the given id exists.");
+			}
+
+			var deletedScheduleId = await UnitOfWork.SchedulesRepository.Delete(id);
+			if (deletedScheduleId == 0)
+			{
+				return BadRequest("Error deleting schedule.");
+			}
+
+			await UnitOfWork.SaveChangesAsync();
+
+			return Ok();
+		}
 
 		[HttpPut]
 		public async Task<ActionResult<ScheduleDTO>> Put([FromBody]ScheduleEditObject data)

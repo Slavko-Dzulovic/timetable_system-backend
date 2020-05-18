@@ -29,8 +29,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 		{
 			var checkIfAlreadyAddedQuery = await _dbContext.Schedules
 				.Include(s => s.Semester)
-				.AnyAsync(s => s.Id == schedule.Id &&
-				               s.IsActive);
+				.AnyAsync(s => s.IsActive &&
+				               s.DepartmentId == schedule.DepartmentId &&
+				               s.SemesterId == schedule.SemesterId);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -45,8 +46,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 		{
 			var checkIfAlreadyAddedQuery = _dbContext.Schedules
 				.Include(s => s.Semester)
-				.Any(s => s.Id == schedule.Id &&
-				          s.IsActive);
+				.Any(s => s.IsActive && 
+				          s.DepartmentId == schedule.DepartmentId &&
+				          s.SemesterId == schedule.SemesterId);
 			if (checkIfAlreadyAddedQuery)
 			{
 				return null;
@@ -85,6 +87,19 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Schedules
 			_dbContext.Schedules.Update(schedule);
 
 			return true;
+		}
+
+		public async Task<short> Delete(short id)
+		{
+			var schedule = await _dbContext.Schedules.FirstOrDefaultAsync(s => s.Id == id);
+			if (schedule == null)
+			{
+				return 0;
+			}
+
+			_dbContext.Schedules.Remove(schedule);
+			
+			return id;
 		}
 
 		public async Task<List<Schedule>> GetActiveSchedulesBySemesterAsync(short semesterId)

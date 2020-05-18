@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 {
@@ -20,7 +21,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 		public bool IsActive { get; set; }
 		
 		[JsonProperty("updated_at")]
-		public bool UpdatedAt { get; set; }
+		public DateTime UpdatedAt { get; set; }
 		
 		[JsonProperty("semester")]
 		public string Semester { get; set; }

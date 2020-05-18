@@ -119,14 +119,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 
 		public async Task<short> DeleteTermAsync(short id)
 		{
-			var term = _dbContext.Terms.FirstOrDefault(t => t.Id == id);
+			var term = await _dbContext.Terms.FirstOrDefaultAsync(t => t.Id == id);
 			if (term == null)
 			{
 				return 0;
 			}
 
 			_dbContext.Terms.Remove(term);
-			await _dbContext.SaveChangesAsync();
 			
 			return id;
 		}
