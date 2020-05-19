@@ -1,8 +1,8 @@
-﻿FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200 AS base
+﻿FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /src
 COPY . .
 RUN dotnet restore -nowarn:msb3202,nu1503

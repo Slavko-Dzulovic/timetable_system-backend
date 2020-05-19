@@ -45,17 +45,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 			});
-			
-			services.AddCors(options =>
-			{
-				options.AddPolicy(name: MyAllowSpecificOrigins,
-					builder =>
-					{
-						builder.AllowAnyOrigin();
-						builder.AllowAnyHeader();
-						builder.AllowAnyMethod();
-					});
-			});
+
+			services.AddCors();
 			
 			// configure strongly typed settings objects
 			var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -92,6 +83,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 			}
 			else
 			{
+				UpdateDatabase(app);
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 				app.UseHttpsRedirection();
@@ -108,31 +100,29 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
 			});
 
-			app.UseCors(MyAllowSpecificOrigins);
-				
 			app.UseRouting();
-
+			
+			app.UseCors(
+				options => options
+					.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader()
+			);
+			
 			app.UseAuthentication();
 			
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-			
-			UpdateDatabase(app);
 		}
 
 		private static void UpdateDatabase(IApplicationBuilder app)
 		{
-			using (var serviceScope = app.ApplicationServices
+			using var serviceScope = app.ApplicationServices
 				.GetRequiredService<IServiceScopeFactory>()
-				.CreateScope())
-			{
-				using (var context = serviceScope.ServiceProvider.GetService<TimetableDbContext>())
-				{
-					context.Database.Migrate();
-					
-				}
-			}
+				.CreateScope();
+			using var context = serviceScope.ServiceProvider.GetService<TimetableDbContext>();
+			context.Database.Migrate();
 		}
 	}
 }
