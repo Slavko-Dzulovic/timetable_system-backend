@@ -28,7 +28,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 					options => options.MapFrom(source => source.IsActive))
 				.ForMember(
 					destination => destination.UpdatedAt,
-					options => options.MapFrom(source => source.UpdatedAt))
+					options => options.MapFrom(source => ToJavaScriptMilliseconds(source.UpdatedAt)))
 				.ForMember(
 					destination => destination.Semester,
 					options => options.MapFrom(source => source.Semester.Name));

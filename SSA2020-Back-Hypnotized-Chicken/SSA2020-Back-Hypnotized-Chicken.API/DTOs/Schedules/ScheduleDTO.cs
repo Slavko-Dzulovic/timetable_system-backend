@@ -21,7 +21,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 		public bool IsActive { get; set; }
 		
 		[JsonProperty("updated_at")]
-		public DateTime UpdatedAt { get; set; }
+		public long UpdatedAt { get; set; }
 		
 		[JsonProperty("semester")]
 		public string Semester { get; set; }
