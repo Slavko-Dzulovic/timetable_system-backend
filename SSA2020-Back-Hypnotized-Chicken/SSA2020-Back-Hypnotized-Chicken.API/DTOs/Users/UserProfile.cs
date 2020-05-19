@@ -22,7 +22,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Users
 					options => options.MapFrom(source => source.Username))
 				.ForMember(
 					destination => destination.Token,
-					options => options.MapFrom(source => source.Token));
+					options => options.MapFrom(source => source.Token))
+				.ForMember(
+					destination => destination.Role,
+					options => options.MapFrom(source => source.Role));
 		}
 	}
 }

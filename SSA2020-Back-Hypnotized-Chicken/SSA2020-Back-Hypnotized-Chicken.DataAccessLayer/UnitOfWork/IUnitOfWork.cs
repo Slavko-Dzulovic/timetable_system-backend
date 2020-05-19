@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Subjects;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Classrooms;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Departments;
@@ -13,7 +14,7 @@ using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Weekdays;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 {
-	public interface IUnitOfWork
+	public interface IUnitOfWork : IDisposable
 	{
 		ISubjectsRepository SubjectsRepository { get; }
         IClassroomsRepository ClassroomsRepository { get; }
@@ -37,10 +38,5 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork
 		/// Save context changes
 		/// </summary>
 		void SaveChanges();
-
-		/// <summary>
-		/// Dispose context
-		/// </summary>
-		void Dispose();
 	}
 }

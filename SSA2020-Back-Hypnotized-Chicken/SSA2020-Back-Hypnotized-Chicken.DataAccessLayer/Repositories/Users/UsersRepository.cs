@@ -77,12 +77,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users
 			// validation
 			if (string.IsNullOrWhiteSpace(password))
 			{
-				throw new Exception("Password is required");
+				return null;
 			}
 			
 			if (_dbContext.Users.Any(x => x.Username == username))
 			{
-				throw new Exception("Username \"" + username + "\" is already taken");
+				return null;
 			}
 
 			byte[] passwordHash, passwordSalt;

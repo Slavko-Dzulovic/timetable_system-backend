@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
+using SSA2020_Back_Hypnotized_Chicken.Data.Helpers;
 
 namespace SSA2020_Back_Hypnotized_Chicken.Data
 {
@@ -27,7 +28,18 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            PasswordHelper.CreatePasswordHash("admin", out var passwordHash, out var passwordSalt);
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                Id = 1,
+                Username = "admin",
+                FirstName = "admin",
+                LastName = "admin",
+                Role = "Admin",
+                Token = string.Empty,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            });
         }
 
         public override int SaveChanges()

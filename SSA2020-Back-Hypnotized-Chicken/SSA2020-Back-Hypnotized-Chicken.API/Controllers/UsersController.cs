@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SSA2020_Back_Hypnotized_Chicken.API.DTOs.Users;
 using SSA2020_Back_Hypnotized_Chicken.API.Models.Users;
+using SSA2020_Back_Hypnotized_Chicken.CommonHelper.Helpers;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork;
 
@@ -83,12 +84,22 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return BadRequest("Not all of the needed information is supplied.");
 			}
 
+			userRegisterModel.Password = PasswordMethods.GeneratePassword(true, true, true, true, 16);
+
 			var savedUser = await UnitOfWork.UsersRepository.CreateUser(userRegisterModel.Username, userRegisterModel.Password,
 																	    userRegisterModel.FirstName, userRegisterModel.LastName);
 
 			if (savedUser == null)
 			{
 				return BadRequest("Error saving user to DB");
+			}
+			
+			var sendEmailResult = EmailMethods.SendEmail(userRegisterModel.Username, userRegisterModel.FirstName,
+				userRegisterModel.LastName, userRegisterModel.Password);
+
+			if (!sendEmailResult)
+			{
+				BadRequest("Email is not sent!");
 			}
 			
 			await UnitOfWork.SaveChangesAsync();

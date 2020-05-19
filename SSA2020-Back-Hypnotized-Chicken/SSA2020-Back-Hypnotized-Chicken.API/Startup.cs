@@ -117,6 +117,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+			
+			UpdateDatabase(app);
 		}
 
 		private static void UpdateDatabase(IApplicationBuilder app)
@@ -128,6 +130,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API
 				using (var context = serviceScope.ServiceProvider.GetService<TimetableDbContext>())
 				{
 					context.Database.Migrate();
+					
 				}
 			}
 		}
