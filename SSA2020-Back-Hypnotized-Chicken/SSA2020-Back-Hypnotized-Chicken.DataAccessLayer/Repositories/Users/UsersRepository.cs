@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SSA2020_Back_Hypnotized_Chicken.CommonHelper.Helpers;
 using SSA2020_Back_Hypnotized_Chicken.Data;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 
@@ -23,17 +24,21 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users
 
 		public async Task<User> AuthenticateAsync(string username, string password)
 		{
-			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username &&
-			                                                           u.Password == password);
+			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
 			
 			if (user == null)
 			{
 				return null;
 			}
 
+			if (!PasswordMethods.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+			{
+				return null;
+			}
+
 			// authentication successful so generate jwt token
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes("secret, obviously");
+			var key = Encoding.ASCII.GetBytes("obligatory secret");
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(new [] 
@@ -41,14 +46,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users
 					new Claim(ClaimTypes.Name, user.Id.ToString()),
 					new Claim(ClaimTypes.Role, user.Role)
 				}),
-				Expires = DateTime.UtcNow.AddDays(7),
+				Expires = DateTime.Now.AddDays(7),
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 			};
 			var token = tokenHandler.CreateToken(tokenDescriptor);
 			user.Token = tokenHandler.WriteToken(token);
 			
-			user.Password = null;
-			return user;
+			return user.WithoutPassword();
 		}
 
 		public async Task<List<User>> GetAllAsync()
@@ -57,7 +61,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users
 
 			foreach (var user in users)
 			{
-				user.Password = null;
+				user.WithoutPassword();
 			}
 
 			return users;
@@ -66,6 +70,39 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users
 		public Task<User> GetByIdAsync(int id)
 		{
 			throw new System.NotImplementedException();
+		}
+		
+		public async Task<User> CreateUser(string username, string password, string firstName, string lastName)
+		{
+			// validation
+			if (string.IsNullOrWhiteSpace(password))
+			{
+				throw new Exception("Password is required");
+			}
+			
+			if (_dbContext.Users.Any(x => x.Username == username))
+			{
+				throw new Exception("Username \"" + username + "\" is already taken");
+			}
+
+			byte[] passwordHash, passwordSalt;
+			PasswordMethods.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+			var user = new User
+			{
+				FirstName = firstName,
+				LastName = lastName,
+				Username = username,
+				PasswordHash = passwordHash,
+				PasswordSalt = passwordSalt,
+				Role = Role.Admin,
+				Token = string.Empty
+			};
+			
+			await _dbContext.Users.AddAsync(user);
+			
+
+			return user;
 		}
 	}
 }

@@ -15,5 +15,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Users
 
 		[JsonProperty("username")]
 		public string Username { get; set; }
+		
+		[JsonProperty("token")]
+		public string Token { get; set; }
 	}
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
 
-namespace SSA2020_Back_Hypnotized_Chicken.API.Helpers
+namespace SSA2020_Back_Hypnotized_Chicken.CommonHelper.Helpers
 {
 	public static class ExtensionMethods
 	{
@@ -18,7 +18,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Helpers
 		        return null;
 	        }
 
-            user.Password = null;
+            user.PasswordHash = null;
             return user;
         }
 	}

@@ -9,8 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using SSA2020_Back_Hypnotized_Chicken.API.Helpers;
+using SSA2020_Back_Hypnotized_Chicken.CommonHelper.Models;
 using SSA2020_Back_Hypnotized_Chicken.Data;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork;
 
 namespace SSA2020_Back_Hypnotized_Chicken.API

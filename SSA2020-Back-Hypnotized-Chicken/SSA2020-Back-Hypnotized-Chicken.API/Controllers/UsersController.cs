@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SSA2020_Back_Hypnotized_Chicken.API.DTOs.Users;
 using SSA2020_Back_Hypnotized_Chicken.API.Models.Users;
@@ -53,7 +54,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 		public async Task<ActionResult<UserDTO>> GetById(int id)
 		{
 			// only allow admins to access other user records
-			var currentUserId = int.Parse(User.Identity.Name);
+			var currentUserId = int.Parse(User.Identity.Name ?? string.Empty);
 			if (id != currentUserId && !User.IsInRole(Role.Admin))
 			{
 				return Forbid();
@@ -69,6 +70,32 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var userMapResult = Mapper.Map<User, UserDTO>(user);
 			
 			return Ok(userMapResult);
+		}
+		
+		[AllowAnonymous]
+		[HttpPost("register")]
+		[ProducesResponseType(typeof(UserDTO), StatusCodes.Status201Created)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public async Task<ActionResult<UserDTO>> Post([FromBody]UserRegisterModel userRegisterModel)
+		{
+			if (!ModelState.IsValid)
+			{ 
+				return BadRequest("Not all of the needed information is supplied.");
+			}
+
+			var savedUser = await UnitOfWork.UsersRepository.CreateUser(userRegisterModel.Username, userRegisterModel.Password,
+																	    userRegisterModel.FirstName, userRegisterModel.LastName);
+
+			if (savedUser == null)
+			{
+				return BadRequest("Error saving user to DB");
+			}
+			
+			await UnitOfWork.SaveChangesAsync();
+
+			var userMapResult = Mapper.Map<User, UserDTO>(savedUser);
+
+			return Created(string.Empty, userMapResult);
 		}
 	}
 }

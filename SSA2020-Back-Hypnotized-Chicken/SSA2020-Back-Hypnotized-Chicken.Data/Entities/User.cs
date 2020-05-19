@@ -32,17 +32,22 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		public string Username { get; set; }
 
 		[Required]
-		[Column("password", Order = 4)]
+		[Column("password_hash", Order = 4)]
 		[MaxLength(255)]
-		public string Password { get; set; }
+		public byte[] PasswordHash { get; set; }
+		
+		[Required]
+		[Column("password_salt", Order = 5)]
+		[MaxLength(255)]
+		public byte[] PasswordSalt { get; set; }
 
 		[Required]
-		[Column("role", Order = 5)]
+		[Column("role", Order = 6)]
 		[MaxLength(255)]
 		public string Role { get; set; }
 		
 		[Required]
-		[Column("token", Order = 6)]
+		[Column("token", Order = 7)]
 		[MaxLength(255)]
 		public string Token { get; set; }
 	}

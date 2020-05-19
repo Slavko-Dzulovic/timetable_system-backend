@@ -9,5 +9,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Users
 		Task<User> AuthenticateAsync(string username, string password);
 		Task<List<User>> GetAllAsync();
 		Task<User> GetByIdAsync(int id);
+		Task<User> CreateUser(string username, string password, string firstName, string lastName);
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace SSA2020_Back_Hypnotized_Chicken.API.Helpers
+﻿namespace SSA2020_Back_Hypnotized_Chicken.CommonHelper.Models
 {
 	public class AppSettings
 	{
