@@ -75,8 +75,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 		
 		[AllowAnonymous]
 		[HttpPost("register")]
-		[ProducesResponseType(typeof(UserDTO), StatusCodes.Status201Created)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<UserDTO>> Post([FromBody]UserRegisterModel userRegisterModel)
 		{
 			if (!ModelState.IsValid)

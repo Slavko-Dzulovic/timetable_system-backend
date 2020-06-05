@@ -21,8 +21,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 		public TermsController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork) { }
 
 		[HttpPost]
-		[ProducesResponseType(typeof(TermDTO), StatusCodes.Status201Created)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<TermDTO>> Post([FromBody]TermPostObject term)
 		{
 			if (!ModelState.IsValid)
@@ -62,7 +60,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var startTimeDT = new DateTime(2017, 1, 1, int.Parse(matchStartTime.Groups[1].Value), int.Parse(matchStartTime.Groups[2].Value), 0);
 			var endTimeDT = new DateTime(2017, 1, 1, int.Parse(matchEndTime.Groups[1].Value), int.Parse(matchEndTime.Groups[2].Value), 0);
 
-			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(null, startTimeDT, endTimeDT, term.WeekdayId, term.ClassroomId, term.ScheduleId))
+			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(null, startTimeDT, endTimeDT, term.WeekdayId, 
+				term.ClassroomId, term.ScheduleId, term.LecturerId, term.SubjectId, term.ModuleId, term.SemesterId))
 			{
 				return BadRequest("The created term overlaps with other terms. Please pick another start and end time.");
 			}
@@ -143,7 +142,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var startTimeDT = new DateTime(2017, 1, 1, int.Parse(matchStartTime.Groups[1].Value), int.Parse(matchStartTime.Groups[2].Value), 0);
 			var endTimeDT = new DateTime(2017, 1, 1, int.Parse(matchEndTime.Groups[1].Value), int.Parse(matchEndTime.Groups[2].Value), 0);
 
-			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(data.Id, startTimeDT, endTimeDT, data.WeekdayId, data.ClassroomId, data.ScheduleId))
+			if (UnitOfWork.TermsRepository.TermOverlapsWithOthers(data.Id, startTimeDT, endTimeDT,
+				data.WeekdayId, data.ClassroomId, data.ScheduleId, data.LecturerId, data.SubjectId, data.ModuleId, data.SemesterId))
 			{
 				return BadRequest("The created term overlaps with others. Please pick another start and end time.");
 			}

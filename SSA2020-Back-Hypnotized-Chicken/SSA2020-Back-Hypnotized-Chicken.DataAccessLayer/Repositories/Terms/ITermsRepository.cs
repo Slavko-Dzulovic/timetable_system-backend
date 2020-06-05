@@ -22,6 +22,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 		Task<List<Term>> GetTermsByScheduleAndWeekdayAsync(short scheduleId, short weekdayId);
 		List<Term> GetTermsByScheduleAndWeekday(short scheduleId, short weekdayId);
 		Term GetTermById(short id);
-		bool TermOverlapsWithOthers(short? termId, DateTime start1, DateTime end1, short weekdayId, short classroomId, short scheduleId);
+		bool TermOverlapsWithOthers(short? termId, DateTime start1, DateTime end1, short weekdayId, short classroomId, 
+			short scheduleId, short lecturerId, short subjectId, short moduleId, short semesterId);
 	}
 }

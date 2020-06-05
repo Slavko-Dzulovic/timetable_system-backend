@@ -224,34 +224,63 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 				.SingleOrDefault(t => t.Id == id);
 		}
 		
-		public bool TermOverlapsWithOthers(short? termId, DateTime start1, DateTime end1, short weekdayId, short classroomId, short scheduleId)
+		public bool TermOverlapsWithOthers(short? termId, DateTime start1, DateTime end1,
+			short weekdayId, short classroomId, short scheduleId, short lecturerId, short subjectId, short moduleId, short semesterId)
 		{
-			List<Term> terms = _dbContext.Terms
+			var terms = _dbContext.Terms
 				.Include(t => t.Schedule)
 				.Include(t => t.Weekday)
 				.Include(t => t.Classroom)
+				.Include(t => t.Slot)
 				.Where(t => t.Schedule.IsActive &&
-				            t.ClassroomId == classroomId &&
 				            t.WeekdayId == weekdayId)
 				.ToList();
+			if (terms == null ||
+			    !terms.Any())
+			{
+				return false;
+			}
 			
-			foreach (Term term in terms)
+			foreach (var term in terms)
 			{
 				if (termId == null)
 				{
-					DateTime start2 = term.StartTime;
-					DateTime end2 = term.EndTime;
+					var start2 = term.StartTime;
+					var end2 = term.EndTime;
 
-					if (start1 < end2 && end1 > start2)
+					if (term.WeekdayId == weekdayId &&
+					    term.ClassroomId == classroomId &&
+					    term.Slot.SubjectId == subjectId &&
+					    term.Slot.LecturerId == lecturerId &&
+					    start1 == start2 && end1 == end2 &&
+					    term.Slot.ModuleId != moduleId)
+					{
+						return false;
+					}
+
+					if (start1 < end2 && end1 > start2 &&
+					    term.ClassroomId == classroomId ||
+					    start1 < end2 && end1 > start2 && 
+					    term.Slot.LecturerId == lecturerId)
 					{
 						return true;
 					}
 				}
 				else
 				{
-					DateTime start2 = term.StartTime;
-					DateTime end2 = term.EndTime;
-
+					var start2 = term.StartTime;
+					var end2 = term.EndTime;
+					
+					if (term.WeekdayId == weekdayId &&
+					    term.ClassroomId == classroomId &&
+					    term.Slot.SubjectId == subjectId &&
+					    term.Slot.LecturerId == lecturerId &&
+					    start1 == start2 && end1 == end2 &&
+					    term.Slot.ModuleId != moduleId)
+					{
+						return false;
+					}
+					
 					if (term.Id != termId && start1 < end2 && end1 > start2)
 					{
 						return true;

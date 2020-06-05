@@ -19,8 +19,6 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 		public SchedulesController(IMapper mapper, IUnitOfWork unitOfWork) : base(mapper, unitOfWork) {}
 		
 		[HttpPost]
-		[ProducesResponseType(typeof(ScheduleDTO), StatusCodes.Status201Created)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<ScheduleDTO>> Post([FromBody]SchedulePostObject schedule)
 		{
 			if (!ModelState.IsValid)

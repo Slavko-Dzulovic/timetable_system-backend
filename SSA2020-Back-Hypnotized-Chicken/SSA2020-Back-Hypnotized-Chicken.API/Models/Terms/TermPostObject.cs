@@ -29,6 +29,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		[Required]
 		[JsonProperty("weekday_id")]
 		public short WeekdayId { get; set; }
+		
 		[Required]
 		[JsonProperty("classroom_id")]
 		public short ClassroomId { get; set; }
