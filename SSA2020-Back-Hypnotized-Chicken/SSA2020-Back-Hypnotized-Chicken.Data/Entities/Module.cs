@@ -13,10 +13,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		RI = 4,
 		IEE = 5,
 		EES = 6,
-		PM_Global = 7,
-		IM_Global = 8,
-		TI_Global = 9,
-		MEH_Global = 10
+		PM = 7,
+		IM = 8,
+		TI = 9,
+		MEH = 10
 	}
 	
 	[Table("modules")]

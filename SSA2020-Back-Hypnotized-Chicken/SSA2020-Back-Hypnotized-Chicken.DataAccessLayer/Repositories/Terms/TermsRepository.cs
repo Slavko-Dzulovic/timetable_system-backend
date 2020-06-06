@@ -281,7 +281,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Terms
 						return false;
 					}
 					
-					if (term.Id != termId && start1 < end2 && end1 > start2)
+					if (term.Id != termId && 
+					    start1 < end2 && end1 > start2 &&
+					    term.ClassroomId == classroomId ||
+					    start1 < end2 && end1 > start2 && 
+					    term.Slot.LecturerId == lecturerId)
 					{
 						return true;
 					}

@@ -62,6 +62,18 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                 Id = (short) ClassroomSeed.u218,
                 Label = EnumHelper.GetAttributeValue<DisplayAttribute>(ClassroomSeed.u218).Name
             }).InsertSql);
+            
+            migrationBuilder.Sql((new Classroom()
+            {
+                Id = (short) ClassroomSeed.u316,
+                Label = EnumHelper.GetAttributeValue<DisplayAttribute>(ClassroomSeed.u316).Name
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Classroom()
+            {
+                Id = (short) ClassroomSeed.u14,
+                Label = EnumHelper.GetAttributeValue<DisplayAttribute>(ClassroomSeed.u14).Name
+            }).InsertSql);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -83,6 +95,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Classroom() { Id = (short)ClassroomSeed.u217}).DeleteSql);
             
             migrationBuilder.Sql((new Classroom() { Id = (short)ClassroomSeed.u218}).DeleteSql);
+            
+            migrationBuilder.Sql((new Classroom() { Id = (short)ClassroomSeed.u316}).DeleteSql);
+            
+            migrationBuilder.Sql((new Classroom() { Id = (short)ClassroomSeed.u14}).DeleteSql);
         }
     }
 }

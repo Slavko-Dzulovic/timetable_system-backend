@@ -51,36 +51,54 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
 
             migrationBuilder.Sql((new Module()
             {
-                Id = (short) Modules.IM_Global,
-                Name = Modules.IM_Global.ToString(),
+                Id = (short) Modules.IM,
+                Name = Modules.IM.ToString(),
                 DepartmentId = (short) Departments.IM
             }).InsertSql);
 
             migrationBuilder.Sql((new Module()
             {
-                Id = (short) Modules.PM_Global,
-                Name = Modules.PM_Global.ToString(),
+                Id = (short) Modules.PM,
+                Name = Modules.PM.ToString(),
                 DepartmentId = (short) Departments.PM
             }).InsertSql);
 
             migrationBuilder.Sql((new Module()
             {
-                Id = (short) Modules.TI_Global,
-                Name = Modules.TI_Global.ToString(),
+                Id = (short) Modules.TI,
+                Name = Modules.TI.ToString(),
                 DepartmentId = (short) Departments.TI
             }).InsertSql);
 
             migrationBuilder.Sql((new Module()
             {
-                Id = (short) Modules.MEH_Global,
-                Name = Modules.MEH_Global.ToString(),
+                Id = (short) Modules.MEH,
+                Name = Modules.MEH.ToString(),
                 DepartmentId = (short) Departments.MEH
             }).InsertSql);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.Sql((new Module() {Id = 1}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 2}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 3}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 4}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 5}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 6}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 7}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 8}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 9}).DeleteSql);
+            
+            migrationBuilder.Sql((new Module() {Id = 10}).DeleteSql);
         }
     }
 }

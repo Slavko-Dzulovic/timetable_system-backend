@@ -6,7 +6,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 {
 	public enum ClassroomSeed : short
 	{
-		[Display(Name = "Amfiteatar")]
+		[Display(Name = "Amfiteatar (21)")]
 		u21 = 1,
 		
 		[Display(Name = "15")]
@@ -31,7 +31,13 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Entities
 		u217 = 8,
 		
 		[Display(Name = "218")]
-		u218 = 9
+		u218 = 9,
+		
+		[Display(Name = "14")]
+		u14 = 10,
+		
+		[Display(Name = "316")]
+		u316 = 11
 	}
 	
 	[Table("classrooms")]
