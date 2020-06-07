@@ -20,6 +20,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 		[JsonProperty("is_active")]
 		public bool IsActive { get; set; }
 		
+		[JsonProperty("created_at")]
+		public long CreatedAt { get; set; }
+		
 		[JsonProperty("updated_at")]
 		public long UpdatedAt { get; set; }
 		
