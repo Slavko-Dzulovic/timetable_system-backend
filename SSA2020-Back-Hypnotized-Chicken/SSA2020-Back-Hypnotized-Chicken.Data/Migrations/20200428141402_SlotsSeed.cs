@@ -103,7 +103,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                 SubjectId = 8,
                 LecturerId = 9,
                 SemesterId = 3,
-                ModuleId = 1
+                ModuleId = 1,
+                IsOptional = true,
+                OptionalSubjectNumber = 4
             }).InsertSql);
             
             migrationBuilder.Sql((new Slot()
@@ -429,6 +431,179 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                 SemesterId = 8,
                 ModuleId = 1
             }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 48,
+                SubjectId = 29,
+                LecturerId = 28,
+                SemesterId = 3,
+                ModuleId = 1,
+                IsOptional = true,
+                OptionalSubjectNumber = 4
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 49,
+                SubjectId = 30,
+                LecturerId = 29,
+                SemesterId = 3,
+                ModuleId = 1,
+                IsOptional = true,
+                OptionalSubjectNumber = 5
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 50,
+                SubjectId = 31,
+                LecturerId = 30,
+                SemesterId = 3,
+                ModuleId = 1,
+                IsOptional = true,
+                OptionalSubjectNumber = 5
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 51,
+                SubjectId = 8,
+                LecturerId = 9,
+                SemesterId = 3,
+                ModuleId = 2,
+                IsOptional = true,
+                OptionalSubjectNumber = 4
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 52,
+                SubjectId = 8,
+                LecturerId = 9,
+                SemesterId = 3,
+                ModuleId = 3,
+                IsOptional = true,
+                OptionalSubjectNumber = 4
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 53,
+                SubjectId = 30,
+                LecturerId = 29,
+                SemesterId = 3,
+                ModuleId = 3,
+                IsOptional = true,
+                OptionalSubjectNumber = 5
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 54,
+                SubjectId = 32,
+                LecturerId = 31,
+                SemesterId = 3,
+                ModuleId = 3,
+                IsOptional = true,
+                OptionalSubjectNumber = 5
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 55,
+                SubjectId = 33,
+                LecturerId = 32,
+                SemesterId = 3,
+                ModuleId = 3,
+                IsOptional = true,
+                OptionalSubjectNumber = 4
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 56,
+                SubjectId = 34,
+                LecturerId = 32,
+                SemesterId = 3,
+                ModuleId = 2,
+                IsOptional = true,
+                OptionalSubjectNumber = 4
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 57,
+                SubjectId = 4,
+                LecturerId = 4,
+                SemesterId = 3,
+                ModuleId = 2
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 58,
+                SubjectId = 4,
+                LecturerId = 7,
+                SemesterId = 3,
+                ModuleId = 2
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 59,
+                SubjectId = 4,
+                LecturerId = 4,
+                SemesterId = 3,
+                ModuleId = 3
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 60,
+                SubjectId = 4,
+                LecturerId = 7,
+                SemesterId = 3,
+                ModuleId = 3
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 61,
+                SubjectId = 15,
+                LecturerId = 2,
+                SemesterId = 3,
+                ModuleId = 2
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 62,
+                SubjectId = 15,
+                LecturerId = 2,
+                SemesterId = 3,
+                ModuleId = 3
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 63,
+                SubjectId = 30,
+                LecturerId = 29,
+                SemesterId = 3,
+                ModuleId = 2,
+                IsOptional = false
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Slot()
+            {
+                Id = 64,
+                SubjectId = 8,
+                LecturerId = 9,
+                SemesterId = 3,
+                ModuleId = 8,
+                IsOptional = false
+            }).InsertSql);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -526,6 +701,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Slot() {Id = 46}).DeleteSql);
             
             migrationBuilder.Sql((new Slot() {Id = 47}).DeleteSql);
+            
+            migrationBuilder.Sql((new Slot() {Id = 48}).DeleteSql);
+            
+            migrationBuilder.Sql((new Slot() {Id = 49}).DeleteSql);
         }
     }
 }

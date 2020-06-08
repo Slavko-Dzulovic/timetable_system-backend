@@ -28,5 +28,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 		
 		[JsonProperty("semester")]
 		public string Semester { get; set; }
+		
+		[JsonProperty("department")]
+		public string Department { get; set; }
 	}
 }

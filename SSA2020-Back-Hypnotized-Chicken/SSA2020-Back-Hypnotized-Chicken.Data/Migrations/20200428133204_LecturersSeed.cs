@@ -222,6 +222,46 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                 LastName = "Vićović",
                 Vocation = "Asistent"
             }).InsertSql);
+            
+            migrationBuilder.Sql((new Lecturer()
+            {
+                Id = 28,
+                FirstName = "Zoran",
+                LastName = "Nešić",
+                Vocation = "Profesor"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Lecturer()
+            {
+                Id = 29,
+                FirstName = "Marko",
+                LastName = "Popović",
+                Vocation = "Profesor"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Lecturer()
+            {
+                Id = 30,
+                FirstName = "Slobodan",
+                LastName = "Đukić",
+                Vocation = "Profesor"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Lecturer()
+            {
+                Id = 31,
+                FirstName = "...",
+                LastName = "Bjekić",
+                Vocation = "Profesor"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Lecturer()
+            {
+                Id = 32,
+                FirstName = "...",
+                LastName = "...",
+                Vocation = "Profesor"
+            }).InsertSql);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -277,6 +317,14 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Lecturer() { Id = 25}).DeleteSql);
             
             migrationBuilder.Sql((new Lecturer() { Id = 26}).DeleteSql);
+            
+            migrationBuilder.Sql((new Lecturer() { Id = 27}).DeleteSql);
+            
+            migrationBuilder.Sql((new Lecturer() { Id = 28}).DeleteSql);
+            
+            migrationBuilder.Sql((new Lecturer() { Id = 29}).DeleteSql);
+            
+            migrationBuilder.Sql((new Lecturer() { Id = 30}).DeleteSql);
         }
     }
 }

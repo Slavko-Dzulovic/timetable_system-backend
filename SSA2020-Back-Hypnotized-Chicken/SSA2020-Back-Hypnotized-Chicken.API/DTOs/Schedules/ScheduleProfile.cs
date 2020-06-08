@@ -34,7 +34,10 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Schedules
 					options => options.MapFrom(source => ToJavaScriptMilliseconds(source.UpdatedAt)))
 				.ForMember(
 					destination => destination.Semester,
-					options => options.MapFrom(source => source.Semester.Name));
+					options => options.MapFrom(source => source.Semester.Name))
+				.ForMember(
+					destination => destination.Department,
+					options => options.MapFrom(source => source.Department.Name));
 		}
 
 		public static long ToJavaScriptMilliseconds(DateTime dateTime)

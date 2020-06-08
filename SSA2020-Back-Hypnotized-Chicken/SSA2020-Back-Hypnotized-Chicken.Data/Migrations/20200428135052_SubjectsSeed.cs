@@ -174,6 +174,42 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
                 Id = 28,
                 Name = "Savremene softverske arhitekture"
             }).InsertSql);
+            
+            migrationBuilder.Sql((new Subject()
+            {
+                Id = 29,
+                Name = "Organizacija rada"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Subject()
+            {
+                Id = 30,
+                Name = "CAD/CAE konstruisanje"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Subject()
+            {
+                Id = 31,
+                Name = "Osnove elektronike"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Subject()
+            {
+                Id = 32,
+                Name = "Psihologija"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Subject()
+            {
+                Id = 33,
+                Name = "Fizičke osnove elektrotehnike"
+            }).InsertSql);
+            
+            migrationBuilder.Sql((new Subject()
+            {
+                Id = 34,
+                Name = "Industrijski menadžment"
+            }).InsertSql);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -233,6 +269,12 @@ namespace SSA2020_Back_Hypnotized_Chicken.Data.Migrations
             migrationBuilder.Sql((new Subject() {Id = 27}).DeleteSql);
 
             migrationBuilder.Sql((new Subject() {Id = 28}).DeleteSql);
+
+            migrationBuilder.Sql((new Subject() {Id = 29}).DeleteSql);
+
+            migrationBuilder.Sql((new Subject() {Id = 30}).DeleteSql);
+
+            migrationBuilder.Sql((new Subject() {Id = 31}).DeleteSql);
         }
     }
 }
