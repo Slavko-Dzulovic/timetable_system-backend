@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SSA2020_Back_Hypnotized_Chicken.API.DTOs.Slots;
 using SSA2020_Back_Hypnotized_Chicken.API.DTOs.Subjects;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Models.Subjects;
 using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.UnitOfWork;
 
 namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
@@ -56,10 +57,11 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 				return NoContent();
 			}
 
-			var subjectMapResult = Mapper.Map<List<Subject>, List<SubjectDTO>>(list);
+			var subjectMapResult = Mapper.Map<List<SubjectWithIsOptional>, List<SubjectDTO>>(list);
 
 			return Ok(subjectMapResult);
 		}
+		
 		[HttpGet("{id}")]
 		public SubjectDTO GetById(short id)
 		{

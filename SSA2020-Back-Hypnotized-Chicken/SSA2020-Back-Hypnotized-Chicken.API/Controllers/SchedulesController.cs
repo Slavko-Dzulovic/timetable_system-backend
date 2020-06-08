@@ -39,8 +39,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Controllers
 			var savedSchedule = await UnitOfWork.SchedulesRepository.AddNewScheduleAsync(
 				new Schedule
 				{
-					Name = string.Join("_", ((Semesters) schedule.SemesterId).ToString(),
-						((Departments) schedule.DepartmentId).ToString()),
+					Name = string.Join("_", DateTime.Today.ToString("dd-MM-yyyy"),((Semesters) schedule.SemesterId).ToString(),
+						((Departments) schedule.DepartmentId).ToString(), schedule.Name),
 					DepartmentId = schedule.DepartmentId,
 					SemesterId = schedule.SemesterId,
 					IsActive = true

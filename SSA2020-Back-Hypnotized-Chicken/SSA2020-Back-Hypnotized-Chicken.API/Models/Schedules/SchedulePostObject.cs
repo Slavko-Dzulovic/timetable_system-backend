@@ -12,5 +12,9 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.Models
 		[Required]
 		[JsonProperty("department_id")]
 		public short DepartmentId { get; set; }
+		
+		[Required]
+		[JsonProperty("name")]
+		public string Name { get; set; }
 	}
 }

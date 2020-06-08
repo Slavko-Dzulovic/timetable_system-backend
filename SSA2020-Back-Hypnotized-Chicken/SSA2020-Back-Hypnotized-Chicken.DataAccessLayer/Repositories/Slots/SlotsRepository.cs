@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SSA2020_Back_Hypnotized_Chicken.Data;
 using SSA2020_Back_Hypnotized_Chicken.Data.Entities;
+using SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Models.Subjects;
 
 namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 {
@@ -15,14 +16,20 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 			_dbContext = dbContext;
 		}
 
-		public async Task<List<Subject>> SubjectsBySemesterAndModuleAsync(short semesterId, short moduleId)
+		public async Task<List<SubjectWithIsOptional>> SubjectsBySemesterAndModuleAsync(short semesterId, short moduleId)
 		{
 			var queryResult = await _dbContext.Slots
 				.Include(sub => sub.Subject)
 				.Include(mod => mod.Module)
 				.Include(sem => sem.Semester)
-				.Where(s => s.SemesterId == semesterId && s.ModuleId == moduleId)
-				.Select(slot => slot.Subject)
+				.Where(s => s.SemesterId == semesterId && 
+				            s.ModuleId == moduleId)
+				.Select(slot => new SubjectWithIsOptional()
+				{
+					Id = slot.SubjectId,
+					Name = slot.Subject.Name,
+					IsOptional = slot.IsOptional
+				})
 				.Distinct()
 				.ToListAsync();
 			
@@ -42,6 +49,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.DataAccessLayer.Repositories.Slots
 
 			return queryResult;
 		}
+		
 		public async Task<bool> CheckIfSlotExistsAsync(long id)
 		{
 			return await _dbContext.Slots.AnyAsync(s => s.Id == id);

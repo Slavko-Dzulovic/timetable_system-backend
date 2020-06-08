@@ -9,5 +9,8 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Subjects
 		
 		[JsonProperty("name")]
 		public string Name { get; set; }
+
+		[JsonProperty("is_optional")]
+		public bool IsOptional { get; set; }
 	}
 }
