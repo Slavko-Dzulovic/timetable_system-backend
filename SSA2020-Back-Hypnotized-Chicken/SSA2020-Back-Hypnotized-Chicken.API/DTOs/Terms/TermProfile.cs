@@ -70,7 +70,7 @@ namespace SSA2020_Back_Hypnotized_Chicken.API.DTOs.Terms
 					options => options.MapFrom(source => source.Slot.LecturerId))
 				.ForMember(
 					destination => destination.LecturerFullName,
-					options => options.MapFrom(source => source.Slot.Lecturer.Vocation + " " + source.Slot.Lecturer.FirstName + " " + source.Slot.Lecturer.LastName))
+					options => options.MapFrom(source => source.Slot.Lecturer.FirstName + " " + source.Slot.Lecturer.LastName))
 				.ForMember(
 					destination => destination.SlotId,
 					options => options.MapFrom(source => source.SlotId));
